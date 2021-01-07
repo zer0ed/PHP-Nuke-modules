@@ -32,7 +32,7 @@ a:hover { color: #FF3333; }
    border-color: #000000;
    border-style: solid;
    border-width: 1px 0px 1px 0px;
-   background: #CCCCCC url(/themes/Gradient-Red/images/topbar_mid.gif);
+   background: #DDDDDD url(/themes/Gradient-Red/images/topbar_mid.gif);
    color: #000000;
    font-size: 10px;
    font-family: Verdana, Helvetica, sans-serif;
@@ -75,21 +75,21 @@ a:hover { color: #FF3333; }
    border-color: #000000;
    border-style: solid;
    border-width: 1px;
-   background-color: #CCCCCC;
+   background-color: #DDDDDD;
    color: #000000;
    font-size: 11px;
    font-family: Verdana, Helvetica, sans-serif;
 }
 
 .copyright {
-   color: #CCCCCC;
+   color: #DDDDDD;
    font-style: italic;
    font-size: 10px;
    font-family: Arial, Helvetica, sans-serif;
 }
 
 a.copyright {
-   color: #CCCCCC;
+   color: #DDDDDD;
    text-decoration: none;
    font-style: italic;
    font-size: 10px;
@@ -97,7 +97,7 @@ a.copyright {
 }
 
 a.copyright:hover {
-   color: #CCCCCC;
+   color: #DDDDDD;
    background-color: transparent;
    text-decoration: underline;
    font-style: italic;
@@ -119,13 +119,13 @@ a.copyright:hover {
 /* This is the outline round the main forum tables */
 .forumline {
    background-color: #000000;
-   border-color: #CCCCCC #000000 #000000 #CCCCCC;
+   border-color: #000000;
    border-style: solid;
    border-width: 1px;
 }
 
 /* Main table cell colours and backgrounds */
-td.row1 { background-color: #CCCCCC; }
+td.row1 { background-color: #DDDDDD; }
 td.row2 { background-color: #CCCCCC; }
 td.row3 { background-color: #D1D7DC; }
 
@@ -203,7 +203,7 @@ a.forumlink { color: #0000CC; text-decoration: none; }
 a.forumlink:hover { color: #FF3333; }
 
 /* Used for the navigation text, (Page 1,2,3 etc) and the navigation bar when in a forum */
-.nav { font-weight: bold; font-size: 11px; color: #FFFFFF;}
+.nav { font-weight: bold; font-size: 12px; color: #000000;}
 a.nav { color: #0000CC; text-decoration: none; }
 a.nav:hover	{ color: #FF3333; }
 

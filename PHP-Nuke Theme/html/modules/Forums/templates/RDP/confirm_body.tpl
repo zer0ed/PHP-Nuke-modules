@@ -1,10 +1,8 @@
-<table class="block-border" width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td class="block-body">
- <table width="100%" cellspacing="2" cellpadding="2" border="0" align="center">
-  <tr>
-   <td class="nav" align="left"><a href="{U_INDEX}" class="nav">{L_INDEX}</a></td>
-  </tr>
- </table>
-</td></tr></table>
+<table width="100%" cellspacing="2" cellpadding="2" border="0" align="center">
+ <tr>
+  <td class="nav" align="left"><a href="{U_INDEX}" class="nav">{L_INDEX}</a></td>
+ </tr>
+</table>
 <br>
 
 <table class="forumline" width="100%" cellspacing="1" cellpadding="3" border="0">

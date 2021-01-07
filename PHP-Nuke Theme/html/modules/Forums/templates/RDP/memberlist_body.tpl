@@ -1,18 +1,28 @@
+<table width="100%" cellspacing="0" cellpadding="10" border="0" align="center"> 
+ <tr> 
+  <td align="center" valign="top" nowrap="nowrap"><span class="mainmenu">&nbsp;<a href="{U_FAQ}" class="mainmenu"><img src="modules/Forums/templates/RDP/images/icon_mini_faq.gif" width="12" height="13" border="0" alt="{L_FAQ}" hspace="3">Forum FAQ</a>&nbsp; &nbsp;
+   <a href="{U_SEARCH}" class="mainmenu"><img src="modules/Forums/templates/RDP/images/icon_mini_search.gif" width="12" height="13" border="0" alt="{L_SEARCH}" hspace="3">Search Forums</a>&nbsp; &nbsp;
+   <a href="{U_MEMBERLIST}" class="mainmenu"><img src="modules/Forums/templates/RDP/images/icon_mini_members.gif" width="12" height="13" border="0" alt="{L_MEMBERLIST}" hspace="3">Site MemberList</a><br>
+   <a href="{U_GROUP_CP}" class="mainmenu"><img src="modules/Forums/templates/RDP/images/icon_mini_groups.gif" width="12" height="13" border="0" alt="{L_USERGROUPS}" hspace="3">Forum UserGroups</a>&nbsp;
+   <a href="{U_PROFILE}" class="mainmenu"><img src="modules/Forums/templates/RDP/images/icon_mini_profile.gif" width="12" height="13" border="0" alt="{L_PROFILE}" hspace="3">Your Forum Profile</a></span>
+  </td>
+ </tr>
+</table>
+<hr>
+
 <form method="post" action="{S_MODE_ACTION}">
- <table class="block-border" width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td class="block-body">
-  <table width="100%" cellspacing="2" cellpadding="2" border="0" align="center">
-   <tr> 
-    <td align="left">
-     <span class="gensmall">{S_TIMEZONE}</span><br>
-     &nbsp;<span class="nav"><a href="{U_INDEX}" class="nav">{L_INDEX}</a></span>
-    </td>
-    <td class="genmed" valign="top" align="right">
-     {L_SELECT_SORT_METHOD}:&nbsp;{S_MODE_SELECT}&nbsp;&nbsp;{L_ORDER}&nbsp;{S_ORDER_SELECT}&nbsp;&nbsp; 
-     <input type="submit" name="submit" value="{L_SUBMIT}" class="liteoption">
-    </td>
-   </tr>
-  </table>
- </td></tr></table>
+ <table width="100%" cellspacing="2" cellpadding="2" border="0" align="center">
+  <tr> 
+   <td align="left">
+    <span class="gensmall">{S_TIMEZONE}</span><br>
+    &nbsp;<span class="nav"><a href="{U_INDEX}" class="nav">{L_INDEX}</a></span>
+   </td>
+   <td class="genmed" valign="top" align="right">
+    {L_SELECT_SORT_METHOD}:&nbsp;{S_MODE_SELECT}&nbsp;&nbsp;{L_ORDER}&nbsp;{S_ORDER_SELECT}&nbsp;&nbsp; 
+    <input type="submit" name="submit" value="{L_SUBMIT}" class="liteoption">
+   </td>
+  </tr>
+ </table>
  <br>
  
  <table width="100%" cellpadding="3" cellspacing="1" border="0" class="forumline">
@@ -44,16 +54,14 @@
  </table>
 </form>
 
-<br> 
-<table class="block-border" width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td class="block-body">
- <table width="100%" cellspacing="2" border="0" align="center" cellpadding="2">
-  <tr> 
-   <td align="left" valign="top" width="50">&nbsp;&nbsp;</td>
-   <td align="center" valign="top">{JUMPBOX}</td>
-   <td class="nav" align="right" valign="top" nowrap="nowrap">
-    {PAGE_NUMBER}<br>
-    {PAGINATION}
-   </td>
-  </tr>
- </table>
-</td></tr></table>
+<table width="100%" cellspacing="2" border="0" align="center" cellpadding="2">
+ <tr> 
+  <td align="left" valign="top" width="50">&nbsp;&nbsp;</td>
+  <td align="center" valign="top">{JUMPBOX}</td>
+  <td class="nav" align="right" valign="top" nowrap="nowrap">
+   {PAGE_NUMBER}<br>
+   {PAGINATION}
+  </td>
+ </tr>
+</table>
+

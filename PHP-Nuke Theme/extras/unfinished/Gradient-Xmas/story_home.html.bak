@@ -1,0 +1,16 @@
+<table class="block-border" width="100%" border="0" cellspacing="0" cellpadding="4">
+ <tr> 
+  <td class="block-title"><span class="block-title-textbg">: $title :</span></td>
+ </tr>
+ <tr> 
+  <td class="block-body">
+   $posted
+   <a href="modules.php?name=News&amp;new_topic=$topic"><img src="$tipath$topicimage" border="0" Alt="$topictext" align="right" hspace="10" vspace="10"></a> 
+   <br><br>
+   <div class="content">$content</div>
+   <br>
+   $morelink
+  </td>
+ </tr>
+</table>
+<br>

@@ -1,20 +1,30 @@
-<table class="block-border" width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td class="block-body">
- <table width="100%" cellspacing="2" cellpadding="2" border="0">
-  <tr> 
-   <td align="left" valign="bottom" colspan="2">
-    <a class="maintitle" href="{U_VIEW_TOPIC}">{TOPIC_TITLE}</a><br>
-    <span class="gensmall">{S_TIMEZONE}</span><br>
-    <span class="nav">&nbsp;<a href="{U_INDEX}" class="nav">{L_INDEX}</a> -> <a href="{U_VIEW_FORUM}" class="nav">{FORUM_NAME}</a><br><br>
-    <a href="{U_POST_NEW_TOPIC}"><img src="{POST_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" align="middle" /></a>&nbsp;&nbsp;&nbsp;<a href="{U_POST_REPLY_TOPIC}"><img src="{REPLY_IMG}" border="0" alt="{L_POST_REPLY_TOPIC}" align="middle" /></a></span>
-    <span class="gensmall"><b>{PAGINATION}</b><br />&nbsp; </span></td>
-   <td class="gensmall" align="right" valign="middle" nowrap>
-    {S_AUTH_LIST}<br><br>
-    {S_WATCH_TOPIC}<br>
-    <b>{PAGINATION}</b>
-   </td>
-  </tr>
- </table>
-</td></tr></table>
+<table width="100%" cellspacing="0" cellpadding="10" border="0" align="center"> 
+ <tr> 
+  <td align="center" valign="top" nowrap="nowrap"><span class="mainmenu">&nbsp;<a href="{U_FAQ}" class="mainmenu"><img src="modules/Forums/templates/RDP/images/icon_mini_faq.gif" width="12" height="13" border="0" alt="{L_FAQ}" hspace="3">Forum FAQ</a>&nbsp; &nbsp;
+   <a href="{U_SEARCH}" class="mainmenu"><img src="modules/Forums/templates/RDP/images/icon_mini_search.gif" width="12" height="13" border="0" alt="{L_SEARCH}" hspace="3">Search Forums</a>&nbsp; &nbsp;
+   <a href="{U_MEMBERLIST}" class="mainmenu"><img src="modules/Forums/templates/RDP/images/icon_mini_members.gif" width="12" height="13" border="0" alt="{L_MEMBERLIST}" hspace="3">Site MemberList</a><br>
+   <a href="{U_GROUP_CP}" class="mainmenu"><img src="modules/Forums/templates/RDP/images/icon_mini_groups.gif" width="12" height="13" border="0" alt="{L_USERGROUPS}" hspace="3">Forum UserGroups</a>&nbsp;
+   <a href="{U_PROFILE}" class="mainmenu"><img src="modules/Forums/templates/RDP/images/icon_mini_profile.gif" width="12" height="13" border="0" alt="{L_PROFILE}" hspace="3">Your Forum Profile</a></span>
+  </td>
+ </tr>
+</table>
+<hr>
+
+<table width="100%" cellspacing="2" cellpadding="2" border="0">
+ <tr> 
+  <td align="left" valign="bottom" colspan="2">
+   <a class="maintitle" href="{U_VIEW_TOPIC}">{TOPIC_TITLE}</a><br>
+   <span class="gensmall">{S_TIMEZONE}</span><br>
+   <span class="nav">&nbsp;<a href="{U_INDEX}" class="nav">{L_INDEX}</a> -> <a href="{U_VIEW_FORUM}" class="nav">{FORUM_NAME}</a><br><br>
+   <a href="{U_POST_NEW_TOPIC}"><img src="{POST_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" align="middle" /></a>&nbsp;&nbsp;&nbsp;<a href="{U_POST_REPLY_TOPIC}"><img src="{REPLY_IMG}" border="0" alt="{L_POST_REPLY_TOPIC}" align="middle" /></a></span>
+   <span class="gensmall"><b>{PAGINATION}</b><br />&nbsp; </span></td>
+  <td class="gensmall" align="right" valign="middle" nowrap>
+   {S_AUTH_LIST}<br><br>
+   {S_WATCH_TOPIC}<br>
+   <b>{PAGINATION}</b>
+  </td>
+ </tr>
+</table>
 <br>
 
 <table class="forumline" width="100%" cellspacing="1" cellpadding="3" border="0">
@@ -76,18 +86,17 @@
 </table>
 <br>
 
-<table class="block-border" width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td class="block-body">
- <table width="100%" cellspacing="2" cellpadding="2" border="0" align="center">
-  <tr> 
-   <td align="left" valign="top" nowrap="nowrap"><span class="nav">
-    <a href="{U_POST_NEW_TOPIC}"><img src="{POST_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" align="middle" /></a>&nbsp;&nbsp;&nbsp;<a href="{U_POST_REPLY_TOPIC}"><img src="{REPLY_IMG}" border="0" alt="{L_POST_REPLY_TOPIC}" align="middle" /></a></span><br><br>
-    {S_TOPIC_ADMIN}
-   </td>
-   <td align="center" valign="top">{JUMPBOX}</td>
-   <td class="nav" align="right" valign="top" nowrap="nowrap">
-    {PAGE_NUMBER}<br>
-    {PAGINATION} 
-   </td> 
-  </tr>
- </table>
-</td></tr></table>
+<table width="100%" cellspacing="2" cellpadding="2" border="0" align="center">
+ <tr> 
+  <td align="left" valign="top" nowrap="nowrap"><span class="nav">
+   <a href="{U_POST_NEW_TOPIC}"><img src="{POST_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" align="middle" /></a>&nbsp;&nbsp;&nbsp;<a href="{U_POST_REPLY_TOPIC}"><img src="{REPLY_IMG}" border="0" alt="{L_POST_REPLY_TOPIC}" align="middle" /></a></span><br><br>
+   {S_TOPIC_ADMIN}
+  </td>
+  <td align="center" valign="top">{JUMPBOX}</td>
+  <td class="nav" align="right" valign="top" nowrap="nowrap">
+   {PAGE_NUMBER}<br>
+   {PAGINATION} 
+  </td> 
+ </tr>
+</table>
+

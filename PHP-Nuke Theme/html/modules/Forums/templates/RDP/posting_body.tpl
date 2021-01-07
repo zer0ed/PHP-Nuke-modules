@@ -199,41 +199,49 @@ function storeCaret(textEl) {
 //-->
 </script>
 
+<table width="100%" cellspacing="0" cellpadding="10" border="0" align="center"> 
+ <tr> 
+  <td align="center" valign="top" nowrap="nowrap"><span class="mainmenu">&nbsp;<a href="{U_FAQ}" class="mainmenu"><img src="modules/Forums/templates/RDP/images/icon_mini_faq.gif" width="12" height="13" border="0" alt="{L_FAQ}" hspace="3">Forum FAQ</a>&nbsp; &nbsp;
+   <a href="{U_SEARCH}" class="mainmenu"><img src="modules/Forums/templates/RDP/images/icon_mini_search.gif" width="12" height="13" border="0" alt="{L_SEARCH}" hspace="3">Search Forums</a>&nbsp; &nbsp;
+   <a href="{U_MEMBERLIST}" class="mainmenu"><img src="modules/Forums/templates/RDP/images/icon_mini_members.gif" width="12" height="13" border="0" alt="{L_MEMBERLIST}" hspace="3">Site MemberList</a><br>
+   <a href="{U_GROUP_CP}" class="mainmenu"><img src="modules/Forums/templates/RDP/images/icon_mini_groups.gif" width="12" height="13" border="0" alt="{L_USERGROUPS}" hspace="3">Forum UserGroups</a>&nbsp;
+   <a href="{U_PROFILE}" class="mainmenu"><img src="modules/Forums/templates/RDP/images/icon_mini_profile.gif" width="12" height="13" border="0" alt="{L_PROFILE}" hspace="3">Your Forum Profile</a></span>
+  </td>
+ </tr>
+</table>
+<hr>
+
 <!-- BEGIN privmsg_extensions -->
-<table class="block-border" width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td class="block-body">
- <table border="0" cellspacing="0" cellpadding="0" align="center" width="100%">
-  <tr> 
-   <td valign="top" align="center" width="100%"> 
-    <table height="40" cellspacing="2" cellpadding="2" border="0">
-     <tr valign="middle"> 
-      <td>{INBOX_IMG}</td>
-      <td><span class="cattitle">{INBOX_LINK}&nbsp;&nbsp;</span></td>
-      <td>{SENTBOX_IMG}</td>
-      <td><span class="cattitle">{SENTBOX_LINK}&nbsp;&nbsp;</span></td>
-      <td>{OUTBOX_IMG}</td>
-      <td><span class="cattitle">{OUTBOX_LINK}&nbsp;&nbsp;</span></td>
-      <td>{SAVEBOX_IMG}</td>
-      <td><span class="cattitle">{SAVEBOX_LINK}&nbsp;&nbsp;</span></td>
-     </tr>
-    </table>
-   </td>
-  </tr>
- </table>
-</td></tr></table>
-<br>
+<table border="0" cellspacing="0" cellpadding="0" align="center" width="100%">
+ <tr> 
+  <td valign="top" align="center" width="100%"> 
+   <table height="40" cellspacing="2" cellpadding="2" border="0">
+    <tr valign="middle"> 
+     <td>{INBOX_IMG}</td>
+     <td><span class="cattitle">{INBOX_LINK}&nbsp;&nbsp;</span></td>
+     <td>{SENTBOX_IMG}</td>
+     <td><span class="cattitle">{SENTBOX_LINK}&nbsp;&nbsp;</span></td>
+     <td>{OUTBOX_IMG}</td>
+     <td><span class="cattitle">{OUTBOX_LINK}&nbsp;&nbsp;</span></td>
+     <td>{SAVEBOX_IMG}</td>
+     <td><span class="cattitle">{SAVEBOX_LINK}&nbsp;&nbsp;</span></td>
+    </tr>
+   </table>
+  </td>
+ </tr>
+</table>
+<br><hr>
 <!-- END privmsg_extensions -->
 
-<table class="block-border" width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td class="block-body">
- <table width="100%" cellspacing="2" cellpadding="2" border="0" align="center">
-  <tr> 
-   <td align="left">
-    <span class="gensmall">{S_TIMEZONE}</span><br>
-    &nbsp;<span class="nav"><a href="{U_INDEX}" class="nav">{L_INDEX}</a></span>
-   </td>
-   <td valign="top" align="right">{JUMPBOX}</td>
-  </tr>
- </table>
-</td></tr></table>
+<table width="100%" cellspacing="2" cellpadding="2" border="0" align="center">
+ <tr> 
+  <td align="left">
+   <span class="gensmall">{S_TIMEZONE}</span><br>
+   &nbsp;<span class="nav"><a href="{U_INDEX}" class="nav">{L_INDEX}</a></span>
+  </td>
+  <td valign="top" align="right">{JUMPBOX}</td>
+ </tr>
+</table>
 <br>
 
 <form action="{S_POST_ACTION}" method="post" name="post" onsubmit="return checkForm(this)">

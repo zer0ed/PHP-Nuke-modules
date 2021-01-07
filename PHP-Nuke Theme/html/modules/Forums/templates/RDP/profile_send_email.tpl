@@ -23,13 +23,11 @@ function checkForm(formObj) {
 <form action="{S_POST_ACTION}" method="post" name="post" onSubmit="return checkForm(this)">
  {ERROR_BOX}
 
- <table class="block-border" width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td class="block-body">
-  <table width="100%" cellspacing="2" cellpadding="2" border="0" align="center">
-   <tr>
-    <td align="left"><span class="nav"><a href="{U_INDEX}" class="nav">{L_INDEX}</a></span></td>
-   </tr>
-  </table>
- </td></tr></table>
+ <table width="100%" cellspacing="2" cellpadding="2" border="0" align="center">
+  <tr>
+   <td align="left"><span class="nav"><a href="{U_INDEX}" class="nav">{L_INDEX}</a></span></td>
+  </tr>
+ </table>
  <br>
 
  <table border="0" cellpadding="3" cellspacing="1" width="100%" class="forumline">
@@ -65,20 +63,17 @@ function checkForm(formObj) {
  </table>
  <br>
 
- <table class="block-border" width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td class="block-body">
-  <table width="100%" cellspacing="2" border="0" align="center" cellpadding="2">
-   <tr> 
-    <td align="right" valign="top"><span class="gensmall">{S_TIMEZONE}</span></td>
-   </tr>
-  </table>
- </td></tr></table>
-</form>
-<br>
-
-<table class="block-border" width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td class="block-body">
- <table width="100%" cellspacing="2" border="0" align="center">
-  <tr>
-   <td valign="top" align="right">{JUMPBOX}</td>
+ <table width="100%" cellspacing="2" border="0" align="center" cellpadding="2">
+  <tr> 
+   <td align="right" valign="top"><span class="gensmall">{S_TIMEZONE}</span></td>
   </tr>
  </table>
-</td></tr></table>
+</form>
+<hr>
+
+<table width="100%" cellspacing="2" border="0" align="center">
+ <tr>
+  <td valign="top" align="right">{JUMPBOX}</td>
+ </tr>
+</table>
+

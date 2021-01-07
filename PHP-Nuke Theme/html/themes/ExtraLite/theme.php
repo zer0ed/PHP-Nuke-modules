@@ -61,15 +61,15 @@ function themeheader() {
       $loginout = "<a href=\"modules.php?name=Your_Account\">Login!</a>";
       $userbar = "Settings unavailable: you are not logged in!";
    } else {
-      $result = sql_query("select * from ".$prefix."_privmsgs where privmsgs_type='1' && privmsgs_to_userid='$userid'", $dbi);
+      $result = sql_query("select * from ".$prefix."_bbprivmsgs WHERE privmsgs_to_userid='$userid' AND (privmsgs_type='5' OR privmsgs_type='1')", $dbi);
       $msgnum = sql_num_rows($result, $dbi);
 
       $theuser = "Hello $username!";
       $loginout = "<a href=\"modules.php?name=Your_Account&op=logout\">Logout!</a>";
       if ($userid == "2") {
-         $userbar = "<a href=\"modules.php?name=Forums&file=privmsg&folder=inbox\">$msgnum New Messages</a>&nbsp;&middot;&nbsp;<a href=\"modules.php?name=Forums&file=profile&mode=editprofile\">Forum Profile</a>&nbsp;&middot;&nbsp;<a href=\"modules.php?name=Your_Account\">Account Settings</a>&nbsp;&middot;&nbsp;<a href=\"admin.php\">Admin</a>";
+         $userbar = "<a href=\"modules.php?name=Private_Messages\">$msgnum New Messages</a>&nbsp;&middot;&nbsp;<a href=\"modules.php?name=Forums&file=profile&mode=editprofile\">Forum Profile</a>&nbsp;&middot;&nbsp;<a href=\"modules.php?name=Your_Account\">Account Settings</a>&nbsp;&middot;&nbsp;<a href=\"admin.php\">Admin</a>";
       } else {
-         $userbar = "<a href=\"modules.php?name=Forums&file=privmsg&folder=inbox\">$msgnum New Messages</a>&nbsp;&middot;&nbsp;<a href=\"modules.php?name=Forums&file=profile&mode=editprofile\">Forum Profile</a>&nbsp;&middot;&nbsp;<a href=\"modules.php?name=Your_Account\">Account Settings</a>";
+         $userbar = "<a href=\"modules.php?name=Private_Messages\">$msgnum New Messages</a>&nbsp;&middot;&nbsp;<a href=\"modules.php?name=Forums&file=profile&mode=editprofile\">Forum Profile</a>&nbsp;&middot;&nbsp;<a href=\"modules.php?name=Your_Account\">Account Settings</a>";
       }
    }
    

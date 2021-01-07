@@ -1,14 +1,24 @@
-<table class="block-border" width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td class="block-body">
- <table width="100%" cellspacing="2" cellpadding="2" border="0" align="center">
-  <tr>
-   <td align="left">
-    <span class="gensmall">{S_TIMEZONE}</span><br>
-    &nbsp;<span class="nav"><a href="{U_INDEX}" class="nav">{L_INDEX}</a></span>
-   </td>
-   <td valign="top" align="right">{JUMPBOX}</td>
-  </tr>
- </table>
-</td></tr></table>
+<table width="100%" cellspacing="0" cellpadding="10" border="0" align="center"> 
+ <tr> 
+  <td align="center" valign="top" nowrap="nowrap"><span class="mainmenu">&nbsp;<a href="{U_FAQ}" class="mainmenu"><img src="modules/Forums/templates/RDP/images/icon_mini_faq.gif" width="12" height="13" border="0" alt="{L_FAQ}" hspace="3">Forum FAQ</a>&nbsp; &nbsp;
+   <a href="{U_SEARCH}" class="mainmenu"><img src="modules/Forums/templates/RDP/images/icon_mini_search.gif" width="12" height="13" border="0" alt="{L_SEARCH}" hspace="3">Search Forums</a>&nbsp; &nbsp;
+   <a href="{U_MEMBERLIST}" class="mainmenu"><img src="modules/Forums/templates/RDP/images/icon_mini_members.gif" width="12" height="13" border="0" alt="{L_MEMBERLIST}" hspace="3">Site MemberList</a><br>
+   <a href="{U_GROUP_CP}" class="mainmenu"><img src="modules/Forums/templates/RDP/images/icon_mini_groups.gif" width="12" height="13" border="0" alt="{L_USERGROUPS}" hspace="3">Forum UserGroups</a>&nbsp;
+   <a href="{U_PROFILE}" class="mainmenu"><img src="modules/Forums/templates/RDP/images/icon_mini_profile.gif" width="12" height="13" border="0" alt="{L_PROFILE}" hspace="3">Your Forum Profile</a></span>
+  </td>
+ </tr>
+</table>
+<hr>
+
+<table width="100%" cellspacing="2" cellpadding="2" border="0" align="center">
+ <tr>
+  <td align="left">
+   <span class="gensmall">{S_TIMEZONE}</span><br>
+   &nbsp;<span class="nav"><a href="{U_INDEX}" class="nav">{L_INDEX}</a></span>
+  </td>
+  <td valign="top" align="right">{JUMPBOX}</td>
+ </tr>
+</table>
 <br>
 
 <form action="{S_GROUPCP_ACTION}" method="post">
@@ -112,20 +122,18 @@
  </table>
  <br>
 
- <table class="block-border" width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td class="block-body">
-  <table width="100%" cellspacing="2" border="0" align="center" cellpadding="2">
-   <tr>
-    <td align="left" valign="top" width="50">
-    <!-- BEGIN switch_mod_option -->
-    <span class="genmed"><input type="text" class="post" name="username" maxlength="50" size="20" /> <input type="submit" name="add" value="{L_ADD_MEMBER}" class="mainoption" /> <input type="submit" name="usersubmit" value="{L_FIND_USERNAME}" class="liteoption" onClick="window.open('{U_SEARCH_USER}', '_phpbbsearch', 'HEIGHT=250,resizable=yes,WIDTH=400');return false;" /></span><br><br>
-    <!-- END switch_mod_option -->
-    </td>
-    <td class="nav" align="right" valign="top" nowrap="nowrap">
-    {PAGE_NUMBER}<br>
-    {PAGINATION} 
-   </tr>
-  </table>
- </td></tr></table>
+ <table width="100%" cellspacing="2" border="0" align="center" cellpadding="2">
+  <tr>
+   <td align="left" valign="top" width="50">
+   <!-- BEGIN switch_mod_option -->
+   <span class="genmed"><input type="text" class="post" name="username" maxlength="50" size="20" /> <input type="submit" name="add" value="{L_ADD_MEMBER}" class="mainoption" /> <input type="submit" name="usersubmit" value="{L_FIND_USERNAME}" class="liteoption" onClick="window.open('{U_SEARCH_USER}', '_phpbbsearch', 'HEIGHT=250,resizable=yes,WIDTH=400');return false;" /></span><br><br>
+   <!-- END switch_mod_option -->
+   </td>
+   <td class="nav" align="right" valign="top" nowrap="nowrap">
+   {PAGE_NUMBER}<br>
+   {PAGINATION} 
+  </tr>
+ </table>
 
  {PENDING_USER_BOX}
  {S_HIDDEN_FIELDS}

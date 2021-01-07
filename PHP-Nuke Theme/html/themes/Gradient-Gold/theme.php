@@ -17,7 +17,7 @@ include("themes/Gradient-Gold/tables.php");
 
 /* Function themeheader() */
 function themeheader() {
-   global $user, $banners, $sitename, $slogan, $cookie, $prefix, $dbi;
+   global $user, $banners, $sitename, $slogan, $cookie, $prefix, $db;
    cookiedecode($user);
    $userid = $cookie[0];
    $username = $cookie[1];
@@ -30,15 +30,22 @@ function themeheader() {
       $loginout = "<a href=\"modules.php?name=Your_Account\">Login!</a>";
       $userbar = "Settings unavailable: you are not logged in!";
    } else {
-      $result = sql_query("select * from ".$prefix."_privmsgs where privmsgs_type='1' && privmsgs_to_userid='$userid'", $dbi);
-      $msgnum = sql_num_rows($result, $dbi);
+      $sql = "select * from ".$prefix."_bbprivmsgs WHERE privmsgs_to_userid='$userid' AND (privmsgs_type='5' OR privmsgs_type='1')";
+      $result = $db->sql_query($sql);
+      $msgnum = sql_num_rows($result);
 
       $theuser = "Hello $username!";
       $loginout = "<a href=\"modules.php?name=Your_Account&op=logout\">Logout!</a>";
       if ($userid == "2") {
-         $userbar = "<a href=\"modules.php?name=Forums&file=privmsg&folder=inbox\">$msgnum New Messages</a>&nbsp;&middot;&nbsp;<a href=\"modules.php?name=Forums&file=profile&mode=editprofile\">Forum Profile</a>&nbsp;&middot;&nbsp;<a href=\"modules.php?name=Your_Account\">Account Settings</a>&nbsp;&middot;&nbsp;<a href=\"admin.php\">Admin</a>";
+         $userbar = "<a href=\"modules.php?name=Private_Messages\">$msgnum New Messages</a>&nbsp;&middot;&nbsp;<a href=\"modules.php?name=Forums&file=profile&mode=editprofile\">Forum Profile</a>&nbsp;&middot;&nbsp;<a href=\"modules.php?name=Your_Account\">Account Settings</a>&nbsp;&middot;&nbsp;<a href=\"admin.php\">Admin</a>";
       } else {
-         $userbar = "<a href=\"modules.php?name=Forums&file=privmsg&folder=inbox\">$msgnum New Messages</a>&nbsp;&middot;&nbsp;<a href=\"modules.php?name=Forums&file=profile&mode=editprofile\">Forum Profile</a>&nbsp;&middot;&nbsp;<a href=\"modules.php?name=Your_Account\">Account Settings</a>";
+         $userbar = "<a href=\"modules.php?name=Private_Messages\">$msgnum New Messages</a>&nbsp;&middot;&nbsp;<a href=\"modules.php?name=Forums&file=profile&mode=editprofile\">Forum Profile</a>&nbsp;&middot;&nbsp;<a href=\"modules.php?name=Your_Account\">Account Settings</a>";
+      }
+      // create sound if new messages
+      if ($msgnum > "0") {
+         $msgsound = "\n\n<bgsound src=\"themes/Gradient-Gold/sounds/newmsg.wav\">";
+      } else {
+         $msgsound = "";
       }
    }
    
@@ -53,6 +60,7 @@ function themeheader() {
       $tmpl_file = "themes/Gradient-Gold/header.html";
    }
 
+   $public_msg = public_message();
    $thefile = implode("", file($tmpl_file));
    $thefile = addslashes($thefile);
    $thefile = "\$r_file=\"".$thefile."\";";
@@ -69,7 +77,15 @@ function themeheader() {
 
 /* Function themefooter()  */
 function themefooter() {
-   global $index, $foot1, $foot2, $foot3, $foot4;
+   global $index, $foot1, $foot2, $foot3, $total_time, $start_time;
+    // Calculate Page Load Time
+    $mtime = microtime();
+    $mtime = explode(" ",$mtime);
+    $mtime = $mtime[1] + $mtime[0];
+    $end_time = $mtime;
+    $total_time = ($end_time - $start_time);
+    $total_time = ""._PAGEGENERATION." ".substr($total_time,0,5)." "._SECONDS."";
+
    if ($index == 1) {
       $tmpl_file = "themes/Gradient-Gold/center_right.html";
       $thefile = implode("", file($tmpl_file));
@@ -80,7 +96,7 @@ function themefooter() {
       blocks(right);
    }
    
-   $footer_message = "$foot1<br>$foot2<br>$foot3<br>$foot4";
+   $footer_message = "$foot1<br>$foot2<br>$foot3";
    $tmpl_file = "themes/Gradient-Gold/footer.html";
    $thefile = implode("", file($tmpl_file));
    $thefile = addslashes($thefile);
