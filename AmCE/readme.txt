@@ -1,5 +1,5 @@
 /*******************************************************
-* AmCE - Admin miniChat Engine v0.2b for PHP-Nuke 5.5
+* AmCE - Admin miniChat Engine v0.3b for PHP-Nuke 5.5
 * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 *  By: Wes Brewer (nd3@routerdesign.com)
 *  http://www.routerdesign.com
@@ -127,6 +127,16 @@ minichat/*.* ----------------------------> minichat/*.*
 
 5. Changelog
 ------------
+(AmCE 0.3b)
+* non-public, beta stage
+* Fixed bad update onlinelog code which cause some users to be droped from
+   the list.
+* Fixed bad inchat check code in the block
+* Added prepatched admin.php and auth.php files created with php-nuke 5.6
+* Added code to sort the onlinelog list alphabetically
+* Added code for auto hyperlink generation (web and email).  If a message
+   contains either http:// or @ it will create the proper <a href> code.
+
 (AmCE 0.2b)
 * Re-Coded, non-public, beta stage
 * Documentation, readme.txt

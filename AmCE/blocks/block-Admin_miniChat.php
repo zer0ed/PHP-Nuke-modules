@@ -1,7 +1,7 @@
 <?php
 
 /*******************************************************
-* AmCE - Admin miniChat Engine v0.2b for PHP-Nuke 5.5
+* AmCE - Admin miniChat Engine v0.3b for PHP-Nuke 5.5
 * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 *  By: Wes Brewer (nd3@routerdesign.com)
 *  http://www.routerdesign.com
@@ -35,7 +35,7 @@ foreach ($online_array as $user_on) {
 	$fields = explode(",",$user_on);	
 	if ($fields[0] == "$nick" and $fields[1] == 2) {
 		$chat = 1;
-	} else { $chat = 0;	}
+	}
 }
 
 // Who is online title
@@ -104,6 +104,6 @@ if ($chat == 1) {
 }
 
 // Version info
-$content .= "<font class=\"tiny\">AmCE v0.2b [nd3]</font>";
+$content .= "<font class=\"tiny\">AmCE v0.3b [nd3]</font>";
 
 ?>

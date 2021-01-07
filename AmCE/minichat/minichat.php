@@ -1,7 +1,7 @@
 <?php
 
 /*******************************************************
-* AmCE - Admin miniChat Engine v0.2b for PHP-Nuke 5.5
+* AmCE - Admin miniChat Engine v0.3b for PHP-Nuke 5.5
 * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 *  By: Wes Brewer (nd3@routerdesign.com)
 *  http://www.routerdesign.com
@@ -53,13 +53,19 @@ function writemessage($nick, $reload, $message, $msgtype) {
 	} elseif ($msgtype == "adminlogout") {
 	$new_message = "<center><font color=\"#FFD700\">.-= ($timestamp) - <b>$nick</b> has logged out. =-.</font></center><br>\n";
 	} elseif ($msgtype == "norm") {
+	// Strip all HTML characters from the message (security)
 	$message = htmlspecialchars($message);
+	// Auto generate hyperlink if http: is found in message
+	$message = eregi_replace("http://([-_./a-zA-Z0-9!&%#?,'=:~]+)",  "<a href=\"http://\\1\" target=\"_blank\">http://\\1</a>", $message);
+	// Auto generate hyperlink if http: is found in message
+	$message = eregi_replace("([-_./a-zA-Z0-9!&%#?,'=:~]+)@([-_./a-zA-Z0-9!&%#?,'=:~]+)",  "<a href=\"mailto:\\1@\\2\">\\1@\\2</a>", $message);
+	// Format the new message (colourize, font tags, etc..)
 	$new_message = "<font color=\"#DD0000\"><b>$nick:</b></font> $message<br>\n";
 	}
 
 	// Setup the header and footer for the chatlog
-	$header = "<html><head><meta http-equiv=\"refresh\" content=\"$reload\"><meta name=\"robots\" content=\"noindex\"></head><body bgcolor=\"#000000\" text=\"#00FF00\">\n";
-	$footer = "<hr><center><font size=\"2\" color=\"#FFFFFF\">[ AmCE - Admin miniChat Engine: v0.2b || &copy 2002 Wes Brewer || Refresh: $reload sec ]</font></center></body></html>";
+	$header = "<html><head><meta http-equiv=\"refresh\" content=\"$reload\"><meta name=\"robots\" content=\"noindex\"></head><body bgcolor=\"#000000\" text=\"#00FF00\" link=\"#00FF00\" alink=\"#00FF00\" vlink=\"#00FF00\">\n";
+	$footer = "<hr><center><font size=\"2\" color=\"#FFFFFF\">[ AmCE - Admin miniChat Engine: v0.3b || &copy 2002 Wes Brewer || Refresh: $reload sec ]</font></center></body></html>";
 
 	// Open chatlog, empty it, save the new message, save the last 9 old messages, close chatlog
 	$open_file = fopen("messages.html", "w");
@@ -75,28 +81,33 @@ function writemessage($nick, $reload, $message, $msgtype) {
 	}
 }
 
-
 // Code to write out to the online.txt file (onlinelog)
 function writeonline($nick, $ontype) {
 	// Read each line of onlinelog into an array
 	$online_array = file("online.txt");
 
-	// Get each line of the online array, explode the seperator (,), drop duplicate nicks, dump into a new var
+	// Get each line of the online array, explode the seperator (,), drop duplicate nicks, dump into a new online array
 	foreach ($online_array as $user_on) {
 		$fields = explode(",",$user_on);	
 
-		// Drop duplicate nicks
-		if ($fields[0] == "$nick"){
-			break;
+		// Drop duplicate nicks from array
+		if ($fields[0] != "$nick"){
+			// Dump this nick into a new online array
+			$updated[] .= $user_on;
 		}
-
-		// Dump new online data into a new variable
-			$updated .= $user_on;
 	}
 
-	// Add this users new online status to the new online variable
-	$updated .= "$nick\,$ontype \n";
-	$online = stripslashes($updated);
+	// Add this users new online status to the updated online array
+	$updated[] .= "$nick\, $ontype\n";
+
+	// Sort updated online array and dump it into 1 big variable
+	sort ($updated);
+	foreach ($updated as $user_on) {
+		$updatedsort .= $user_on;
+	}
+	
+	// strip any slashes from the nicks
+	$online = stripslashes($updatedsort);
 
 	// Open onlinelog, empty it, save the new online variable/data, close onlinelog
 	$open_file = fopen("online.txt", w);
@@ -110,7 +121,7 @@ function enterchat($nick, $reload, $position) {
 	// Code to setup chatbox position (top or bottom?)
 	if ($position == "Top") {
 		echo "<html><head><title>Site Admin with Mini Chat (Top)</title></head>"
-		."<frameset rows=\"75, *\">"
+		."<frameset rows=\"65, *\">"
 			."<frameset cols=\"110, *\">"
 				."<frame src=\"minichat.php?nick=$nick&amp;reload=$reload\" scrolling=\"no\">"
 				."<frame src=\"messages.html\">"
@@ -129,7 +140,7 @@ function enterchat($nick, $reload, $position) {
 
 	} elseif ($position == "Bottom") {
 		echo "<html><head><title>Site Admin with Mini Chat (Bottom)</title></head>"
-		."<frameset rows=\"*, 75\">"
+		."<frameset rows=\"*, 65\">"
 			."<frame src=\"../admin.php\">"
 			."<frameset cols=\"110, *\">"
 				."<frame src=\"minichat.php?nick=$nick&amp;reload=$reload\" scrolling=\"no\">"
