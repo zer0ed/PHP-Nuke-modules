@@ -17,7 +17,7 @@
 // ~~~~~~~~~~~~~~~~~~~~~~~
 //
 //- AmCE Code
-//   (413-414)
+//   (408-416)
 //############################################## 
 
 require_once("mainfile.php");
@@ -405,13 +405,15 @@ if($admintest) {
 	case "logout":
 	setcookie("admin");
 	$admin = "";
-	include("header.php");
+/*
+  include("header.php");
 	OpenTable();
 	echo "<center><font class=\"title\"><b>"._YOUARELOGGEDOUT."</b></font></center>";
 	CloseTable();
 	include("footer.php");
-			// added by admin MiniChat
-			Header("Location: /minichat/minichat.php?func=adminlogout&nick=$aid");
+*/
+		// added by admin MiniChat
+		Header("Location: /minichat/minichat.php?func=adminlogout&nick=$aid");
 	break;
 
 	case "login";

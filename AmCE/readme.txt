@@ -1,5 +1,5 @@
 /*******************************************************
-* AmCE - Admin miniChat Engine v0.4b for PHP-Nuke 6.9
+* AmCE - Admin miniChat Engine v1.0 for PHP-Nuke 6.9
 * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 *  By: Wes Brewer (nd3@routerdesign.com)
 *  http://www.routerdesign.com
@@ -27,17 +27,14 @@ for your webserver.  This will be changed in a later release!
 
 AmCE is very light weight and non-cpu intensive on either the server
 or the client.  It doesn't use a database, just files and it's not realtime
-but close enough.. it uses user set HTML META refreshes!
+but close enough.. it uses user set HTML META refreshes (time set by admin)!
 
 The Engine itself is 1 file minichat.php with many functions. Since AmCE is very
-light, it has very poor security!!  Both it's online.txt (onlinelog) and
-messages.html (chatlog) files have very poor security!  The Engine (minichat.php)
-has some minimal security checks built in, but don't depend on them!
+light, it has minimal security using a keycode set by the admin!!  
+The file online.txt (onlinelog) has no security at all!!
 
-If security is a consern then use something else!!  If you still want to use miniChat
-then at least use your webserver's authentication method to set up restricted access
-to the minichat/ direcorty (.htaccess in Apache).  You should also setup a robots
-file and deny search engines from webcrawling that directory as explained below.
+You should also setup a robots file and deny search engines from webcrawling
+that directory as explained below.
 
 
 2. Installation
@@ -51,6 +48,22 @@ minichat/*.* ----------------------------> minichat/*.*
 
 3. Use
 ------
+* Set the chatkey value to a random 15 character code (replace 123456789012345) in
+   the following files..  minichat/chatlog.php (1st line), blocks/block-Admin_miniChat.php
+	 (line 14 under user settings section), and minichat/minichat.php (line 13).  All
+	 3 files must have the same value to work correctly
+
+* Set the other options you wish in the blocks/block-Admin_miniChat.php file at the top under
+	 the user settings section.  Chatkey is explained above, chat flashing picture will show
+	 a flashing message picture beside any user in chat (better visability then just colour coded).
+	 Connect mode is just as described in that file. Default position sets the default position
+	 of the chat window for auto connect and forced modes. It also sets it as the default for
+	 manual connect modes but the user can change this.  Default refresh sets the refresh time
+	 for the chat window to check for new messages and display them.  The faster you set this
+	 the higher the load on the server.  Example if it's set to 10 seconds then AmCE checks
+	 the chatlog 6 times per minute per user. You can set this to whatever you want but anywhere
+	 from 10 to 30 seconds are good values for most people.
+
 * Login as the admin in your php-nuke site, add the new Admin miniChat block in the
    blocks section and make sure you set it so only Administrators can see that block!
 
@@ -77,16 +90,17 @@ minichat/*.* ----------------------------> minichat/*.*
 
    Change it to this...
 	 
-	 	case "logout":
-		setcookie("admin");
-		include("header.php");
-		OpenTable();
-		echo "<center><font class=\"title\"><b>"._YOUARELOGGEDOUT."</b></font></center>";
-		CloseTable();
-		include("footer.php");
-			// added by admin MiniChat
-			Header("Location: /minichat/minichat.php?func=adminlogout&nick=$aid");
-		break;	
+	case "logout":
+	setcookie("admin");
+	$admin = "";
+  // include("header.php");
+	// OpenTable();
+	// echo "<center><font class=\"title\"><b>"._YOUARELOGGEDOUT."</b></font></center>";
+	// CloseTable();
+	// include("footer.php");
+		// added by admin MiniChat
+		Header("Location: /minichat/minichat.php?func=adminlogout&nick=$aid");
+	break;
 
 * Add the following code to your auth.php file...
    Near the top of the file under the 1st if statement where it says...
@@ -124,14 +138,28 @@ minichat/*.* ----------------------------> minichat/*.*
 
 4. To Do's
 ----------
-* Better Security.
 * Add timeout values.. incase user's PC crashed and onlinelog was not updated.
 * Run with registar_globals in ON or OFF mode (for users who don't have control of their webserver).
-* Add ability to invite someone to chat.
 
 
 5. Changelog
 ------------
+(AmCE 1.0)
+* non-public, final stage
+* Added chatkey code for security! Now the chatlog is protected unless a user knows the chatkey.
+   minichap.php, chatlog.php, and the AmCE block all know this chatkey to communicate with each other securely.
+	 All this and the only person that needs to know the chatkey is the Admin who installs AmCE.
+* messages.html is now chatlog.php with 1 line of php code for the new chatkey security check.
+* Fixed some bugs in the admin logout code to break out of chat even if user didn't exit chat.
+* Added more code for auto hyperlink generation.  If a message contains www it will create proper
+   <a href> code.
+* Lots of cosmetic changes making chat more colourful with better layout.
+* All messages have timestamps now not just status messages. (server time)
+* Now has 3 "connect to chat" modes.  Manual connect only, Auto connect, and Forced connect!
+* Added flashing message picture as an option, now admin can set it on or off.
+* Removed users ability to set refresh time, admin now sets default refresh for everyone and it can be any value!
+* Chatlog now keeps up to 20 lines of logged messages instead of the former 10 lines.
+
 (AmCE 0.4b)
 * non-public, beta stage
 * Added code to clear the chatlog (messages.html file) once all users leave chat (for some security)

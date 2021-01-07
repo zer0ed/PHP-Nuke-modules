@@ -1,7 +1,6 @@
 <?php
-
 /*******************************************************
-* AmCE - Admin miniChat Engine v0.4b for PHP-Nuke 6.9
+* AmCE - Admin miniChat Engine v1.0 for PHP-Nuke 6.9
 * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 *  By: Wes Brewer (nd3@routerdesign.com)
 *  http://www.routerdesign.com
@@ -9,10 +8,11 @@
 ********************************************************/
 
 // The message box where you type your chat message.
-function messagebox($nick, $reload) {
-	// Make sure a nick has been passed, otherwise deny access
+function messagebox($nick, $reload, $chatkey) {
+	// Make sure a nick and chatkey has been passed, otherwise deny access (security check)
+	if (isset($nick) && $chatkey == "123456789012345" ) {
 		echo "<html><head><meta name=\"robots\" content=\"noindex\"><title>MessageBox</title></head>"
-		."<body bgcolor=\"#990000\" text=\"#FFFFFF\" link=\"#FFFFFF\" alink=\"#FFFFFF\" vlink=\"#FFFFFF\">"
+		."<body bgcolor=\"#4682B4\" text=\"#FFFFFF\" link=\"#FFFFFF\" alink=\"#FFFFFF\" vlink=\"#FFFFFF\">"
 		."<font size=\"2\">"
 		."<form name=\"chat\" method=\"post\" action=\"minichat.php?func=writemessage\">"
 		."<center>"
@@ -21,52 +21,70 @@ function messagebox($nick, $reload) {
 		."Message:<br>"
 		."<input type=\"text\" name=\"message\" size=\"10\"><br>"
 		."<input type=\"hidden\" name=\"msgtype\" value=\"norm\">"
+		."<input type=\"hidden\" name=\"chatkey\" value=\"$chatkey\">"
+		."<b>AmCE</b>"
 		."</center>"
 		."</form>"
 		."</font>"
 		."</body></html>";
+	} else { die ("Access Denied"); }
 }
 
-
-// Code to write out to the messages.html file (chatlog)
-function writemessage($nick, $reload, $message, $msgtype) {
+// Code to write out to the chatlog.php file
+function writemessage($nick, $reload, $message, $msgtype, $chatkey) {
 	// Setup Timestamps
-	$timestamp = gmdate("H:i:s") . " GMT";
+	$timestamp = gmdate("H:i:s");
 
 	// Read each line of chatlog into an array
-	$message_array = file("messages.html");
+	$message_array = file("chatlog.php");
+	
+	// Get chatkey header (stays the same once user sets it)
+	$keyheader = $message_array[0];
 
-	// Get just the last 9 chat messages from the array (not the header & footer)
-	for ($counter = 1; $counter < 10; $counter++) {
-		$old_messages .= $message_array[$counter];
+	// save old messages for updating chatlog
+	if ($msgtype == "clearchat") {
+		// Create 9 blank - lines if clearchat is called
+		for ($counter = 1; $counter < 20; $counter++) {
+			$old_messages .= "-<br>\n";
+		}
+	} else {
+		// Get just the last 20 chat messages from the array (not the headers & footer)
+		for ($counter = 2; $counter < 21; $counter++) {
+			$old_messages .= $message_array[$counter];
+		}
 	}
 
 	// Setup the new message based on it's msgtype
 	if ($msgtype == "enterchat") {
-	$new_message = "<center><font color=\"#FFD700\">.-= ($timestamp) - <b>$nick</b> has entered chat. [refresh: $reload seconds] =-.</font></center><br>\n";
+		$new_message = "<div align=\"right\"><font color=\"#00FF7F\" size=\"2\">($timestamp) - Status: <b>$nick</b> connected.</font></div>\n";
 	} elseif ($msgtype == "exitchat") {
-	$new_message = "<center><font color=\"#FFD700\">.-= ($timestamp) - <b>$nick</b> has left chat. =-.</font></center><br>\n";
+		$new_message = "<div align=\"right\"><font color=\"#FF4500\" size=\"2\">($timestamp) - Status: <b>$nick</b> disconnected.</font></div>\n";
 	} elseif ($msgtype == "adminlogin") {
-	$new_message = "<center><font color=\"#FFD700\">.-= ($timestamp) - <b>$nick</b> has logged in. =-.</font></center><br>\n";
+		$new_message = "<div align=\"right\"><font color=\"#00FF7F\" size=\"2\">($timestamp) - Status: <b>$nick</b> has logged in.</font></div>\n";
 	} elseif ($msgtype == "adminlogout") {
-	$new_message = "<center><font color=\"#FFD700\">.-= ($timestamp) - <b>$nick</b> has logged out. =-.</font></center><br>\n";
+		$new_message = "<div align=\"right\"><font color=\"#FF4500\" size=\"2\">($timestamp) - Status: <b>$nick</b> has logged out.</font></div>\n";
+	} elseif ($msgtype == "clearchat") {
+		$new_message = "<div align=\"right\"><font color=\"#FFA500\" size=\"2\">($timestamp) - Status: The last user has left chat (log cleared)</font></div>\n";
 	} elseif ($msgtype == "norm") {
-	// Strip all HTML characters from the message (security)
-	$message = htmlspecialchars($message);
-	// Auto generate hyperlink if http: is found in message
-	$message = eregi_replace("http://([-_./a-zA-Z0-9!&%#?,'=:~]+)",  "<a href=\"http://\\1\" target=\"_blank\">http://\\1</a>", $message);
-	// Auto generate hyperlink if http: is found in message
-	$message = eregi_replace("([-_./a-zA-Z0-9!&%#?,'=:~]+)@([-_./a-zA-Z0-9!&%#?,'=:~]+)",  "<a href=\"mailto:\\1@\\2\">\\1@\\2</a>", $message);
-	// Format the new message (colourize, font tags, etc..)
-	$new_message = "<font color=\"#DD0000\"><b>$nick:</b></font> $message<br>\n";
+		// Strip all HTML characters from the message (security)
+		$message = htmlspecialchars($message);
+		// Auto generate hyperlink if http: is found in message
+		$message = eregi_replace("http://([-_./a-zA-Z0-9!&%#?,'=:~]+)",  "<a href=\"http://\\1\" target=\"_blank\">http://\\1</a>", $message);
+		// Auto generate hyperlink if www is found in message
+		$message = eregi_replace("www([-_./a-zA-Z0-9!&%#?,'=:~]+)",  "<a href=\"http://www\\1\" target=\"_blank\">http://www\\1</a>", $message);
+		// Auto generate email hyperlink if @ is found in message
+		$message = eregi_replace("([-_./a-zA-Z0-9!&%#?,'=:~]+)@([-_./a-zA-Z0-9!&%#?,'=:~]+)",  "<a href=\"mailto:\\1@\\2\">\\1@\\2</a>", $message);
+		// Format the new message (colourize, font tags, etc..)
+		$new_message = "<font color=\"#C0C0C0\" size=\"2\">($timestamp) </font><font color=\"#87CEFA\"><b>$nick:</b></font> $message<br>\n";
 	}
 
 	// Setup the header and footer for the chatlog
-	$header = "<html><head><meta http-equiv=\"refresh\" content=\"$reload\"><meta name=\"robots\" content=\"noindex\"></head><body bgcolor=\"#000000\" text=\"#00FF00\" link=\"#00FF00\" alink=\"#00FF00\" vlink=\"#00FF00\">\n";
-	$footer = "<hr><center><font size=\"2\" color=\"#FFFFFF\">[ AmCE - Admin miniChat Engine: v0.4b || &copy 2002-2005 Wes Brewer || Refresh: $reload sec ]</font></center></body></html>";
+	$header = "<html><head><meta http-equiv=\"refresh\" content=\"$reload\"><meta name=\"robots\" content=\"noindex\"></head><body bgcolor=\"#000000\" text=\"#F8F8FF\" link=\"#00FFFF\" alink=\"#00FFFF\" vlink=\"#00FFFF\">\n";
+	$footer = "<hr><center><font size=\"2\" color=\"#FFD700\">[ AmCE - Admin miniChat Engine: v1.0 || &copy 2002-2005 Wes Brewer || Refresh: $reload sec ]</font></center></body></html>";
 
 	// Open chatlog, empty it, save the new message, save the last 9 old messages, close chatlog
-	$open_file = fopen("messages.html", "w");
+	$open_file = fopen("chatlog.php", "w");
+	fputs($open_file, $keyheader);
 	fputs($open_file, $header);
 	fputs($open_file, stripslashes($new_message));
 	fputs($open_file, $old_messages);
@@ -75,9 +93,10 @@ function writemessage($nick, $reload, $message, $msgtype) {
 	
 	// Return to the messagebox function (if that's what called this function)
 	if ($msgtype == "norm") {
-	Header("Location: minichat.php?nick=$nick&reload=$reload");
+	Header("Location: minichat.php?nick=$nick&reload=$reload&chatkey=$chatkey");
 	}
 }
+
 
 // Code to write out to the online.txt file (onlinelog)
 function writeonline($nick, $ontype) {
@@ -115,46 +134,41 @@ function writeonline($nick, $ontype) {
 
 
 // Code to enter minichat (via html frames) and notify that we are chat.
-function enterchat($nick, $reload, $position) {
+function enterchat($nick, $reload, $position, $chatkey) {
+
+	// Update onlinelog to show we are in chat
+	writeonline($nick, 2);
+		
+	// Update chatlog with enterchat message
+	writemessage($nick, $reload, null, "enterchat", null);
+
 	// Code to setup chatbox position (top or bottom?)
 	if ($position == "Top") {
 		echo "<html><head><title>Site Admin with Mini Chat (Top)</title></head>"
 		."<frameset rows=\"65, *\">"
 			."<frameset cols=\"110, *\">"
-				."<frame src=\"minichat.php?nick=$nick&amp;reload=$reload\" scrolling=\"no\">"
-				."<frame src=\"messages.html\">"
+				."<frame src=\"minichat.php?nick=$nick&amp;reload=$reload&amp;chatkey=$chatkey\" scrolling=\"no\">"
+				."<frame src=\"chatlog.php?chatkey=$chatkey\">"
 			."</frameset>"
 			."<frame src=\"../admin.php\">"
 		."<noframes><body>Your browser doesn't support frames so you will be unable	to use the Mini Admin Chat."
 		."<br><br>Continue to the <a href=\"../admin.php\">Admin Section</a></body></noframes>"
 		."</frameset>"
 		."</html>";
-
-		// Update onlinelog to show we are in chat
-		writeonline($nick, 2);
-		
-		// Update chatlog with enterchat message
-		writemessage($nick, $reload, null, "enterchat");
-
 	} elseif ($position == "Bottom") {
 		echo "<html><head><title>Site Admin with Mini Chat (Bottom)</title></head>"
 		."<frameset rows=\"*, 65\">"
 			."<frame src=\"../admin.php\">"
 			."<frameset cols=\"110, *\">"
-				."<frame src=\"minichat.php?nick=$nick&amp;reload=$reload\" scrolling=\"no\">"
-				."<frame src=\"messages.html\">"
+				."<frame src=\"minichat.php?nick=$nick&amp;reload=$reload&amp;chatkey=$chatkey\" scrolling=\"no\">"
+				."<frame src=\"chatlog.php?chatkey=$chatkey\">"
 			."</frameset>"
 			."<noframes><body>Your browser doesn't support frames so you will be unable	to use the Mini Admin Chat."
 		 	."<br><br>Continue to the <a href=\"../admin.php\">Admin Section</a></body></noframes>"
 		."</frameset>"
 		."</html>";
-
-		// Update onlinelog to show we are in chat
-		writeonline($nick, 2);
-	
-		// Update chatlog with enterchat message
-		writemessage($nick, $reload, null, "enterchat");
 	}
+	Header("Location: /admin.php");
 }
 
 
@@ -164,13 +178,13 @@ function exitchat($nick, $reload) {
 	writeonline($nick, 1);
 
 	// Update chatlog with exitchat message
-	writemessage($nick, $reload, null, "exitchat");
-	
-	// Exit minichat (frames) and load admin page
-	breakframes("/admin.php");
+	writemessage($nick, $reload, null, "exitchat", null);
 	
 	// Clear message log if no one is in chat
 	clearchat();
+	
+	// Exit minichat (frames) and load admin page
+	breakframes("/admin.php");
 }
 
 
@@ -180,9 +194,9 @@ function adminlogin($nick) {
 	writeonline($nick, 1);
 	
 	// Update chatlog with adminlogin message
-	writemessage($nick, 15, null, "adminlogin");
-	
-	// Continue on to admin page
+	writemessage($nick, 15, null, "adminlogin", null);
+
+// Continue on to admin page
   Header("Location: /admin.php");
 }
 
@@ -199,14 +213,17 @@ function adminlogout($nick) {
 		// check if in chat
 		if ($fields[0] == "$nick" && $fields[1] == 2){
 			$framed = 1;
-		} else { $framed = 0; }
+		}
 	}
 
 	// Update onlinelog to show we are now logged out
 	writeonline($nick, 0);
-	
+
 	// Update chatlog with adminlogout message
-	writemessage($nick, 15, null, "adminlogout");
+	writemessage($nick, 15, null, "adminlogout", null);
+
+	// Clear message log if no one is in chat
+	clearchat();
 
 	if ($framed == 1) {
 		// Exit minichat (frames) and load index page
@@ -227,13 +244,13 @@ function breakframes($toppage) {
 	."</script></head>"
 	."<body><center><h4>Please Wait...</h4></center>"
 	."<p>If you browser doesn't support JavaScript or you have it disabled it then. "
-	."this page will not break out of the frameset automatically! "
+	."this page will not break out of the AmCE Chat frameset automaticlly! "
 	."To proceed you can break the frameset manually by clicking <a href=\"$toppage\" target=\"_top\">here</a>."
 	."</body></html>";
 }
 
 
-// If everyone left chat then clear all messages (lame security code)
+// If everyone left chat then clear all messages (older lame security)
 function clearchat() {
 	// Read each line of onlinelog into an array
 	$online_array = file("online.txt");
@@ -248,23 +265,7 @@ function clearchat() {
 
 	// if inchat = 0 then nobody is in chat so clear messages
 	if ($inchat == 0) {
-		// Setup the header, footer, and cleared message for the chatlog
-		$header = "<html><head><meta http-equiv=\"refresh\" content=\"10\"><meta name=\"robots\" content=\"noindex\"></head><body bgcolor=\"#000000\" text=\"#00FF00\" link=\"#00FF00\" alink=\"#00FF00\" vlink=\"#00FF00\">\n";
-		$footer = "<hr><center><font size=\"2\" color=\"#FFFFFF\">[ AmCE - Admin miniChat Engine: v0.4b || &copy 2002-2005 Wes Brewer || Refresh: 10 sec ]</font></center></body></html>";
-		$clearedmsg = "<center><font color=\"#FF0000\">.-= The last user has left chat (log cleared) =-.</font></center>\n";
-		
-		// Create 9 blank - lines
-		for ($counter = 1; $counter < 10; $counter++) {
-		$clearmsg .= "-<br>\n";
-		}
-
-		// Open chatlog, empty it, write blank lines, close chatlog
-		$open_file = fopen("messages.html", "w");
-		fputs($open_file, $header);
-		fputs($open_file, $clearedmsg);
-		fputs($open_file, $clearmsg);
-		fputs($open_file, $footer);
-		fclose($open_file);
+		writemessage($nick, 15, null, "clearchat", null);
 	}
 }
 
@@ -273,19 +274,19 @@ function clearchat() {
 switch($func) {
 
     default:
-    messagebox($nick, $reload);
+    messagebox($nick, $reload, $chatkey);
     break;
     
     case "writemessage":
-    writemessage($nick, $reload, $message, $msgtype);
+    writemessage($nick, $reload, $message, $msgtype, $chatkey);
     break;
 		
 		case "writeonline";
-		writemessage($nick, $ontype);
+		writeonline($nick, $ontype);
 		break;
 
     case "enterchat":
-    enterchat($nick, $reload, $position);
+    enterchat($nick, $reload, $position, $chatkey);
     break;
 
     case "exitchat":
