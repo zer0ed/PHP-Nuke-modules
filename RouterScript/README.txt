@@ -1,5 +1,5 @@
 /********************************************/
-/* RouterScript 1.5 for PHP-Nuke 5.5.0     */
+/* RouterScript 1.7 for PHP-Nuke 5.5.0     */
 /* By: Wes Brewer (nd3@routerdesign.com)    */
 /* http://www.routerdesign.com              */
 /* Copyright © 2002 by Wes Brewer           */
@@ -42,10 +42,11 @@ html/themes/Example/*.* -----------------> themes/Example/*.*
 
 3. Use
 ------
-Set the user setting variables in modules/Routers/rs_config.php
-Make sure you create the main router directory (maindir) with permissions 777 so 
+* Set the user setting variables in modules/Routers/rs_config.php.
+* If using an older php version then change any round functions to substr functions.
+* Make sure you create the main router directory (maindir) with permissions 777 so 
 the server can write to it if your going to use the auto thumbnail option.
-For the theme skin part.. see themes/Example/routers.html for an example of the template.  In order
+* For the theme skin part.. see themes/Example/routers.html for an example of the template.  In order
 for the theme template to work you must include a routerstheme function in your theme.php file.  See
 themes/Example/theme.php for the proper code.
 
@@ -75,6 +76,15 @@ it like expected file.
 
 6. Changelog
 ------------
+(RouterScript 1.7)
+* Added better routerlist sorting functionality (routers per page, sortby, sortorder)
+* Improved the overall routerlist header & footer look
+* Fixed a bug that displayed the router's wrong build time on some pages.
+* Fixed a bug with the average rating not being rounded properly.
+* Average rating is now stored in the database.
+* Changed the routers theme to allow display of total votes and average rating.
+* Slightly modified the look of the routers poll block & routers theme.
+* HTML checked by a validator (validator.w3.org) and now passes. All HTML corrected.
 
 (RouterScript 1.5)
 * Fixed routers per page bug (was wrong if there were 2 pages).

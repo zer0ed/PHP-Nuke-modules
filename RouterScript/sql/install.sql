@@ -29,6 +29,7 @@ CREATE TABLE nuke_routers (
   rnote varchar(100) default NULL,
   rdetails text,
   vote_total int(10) NOT NULL default '0',
+  vote_avg decimal(4,2) NOT NULL default '0.00',
   vote_1 int(10) NOT NULL default '0',
   vote_2 int(10) NOT NULL default '0',
   vote_3 int(10) NOT NULL default '0',

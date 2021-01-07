@@ -1,7 +1,7 @@
 <?php
 
 /********************************************/
-/* RouterScript 1.5 for PHP-Nuke 5.5.0     */
+/* RouterScript 1.7 for PHP-Nuke 5.5.0     */
 /* By: Wes Brewer (nd3@routerdesign.com)    */
 /* http://www.routerdesign.com              */
 /* Copyright © 2002 by Wes Brewer           */
@@ -111,96 +111,94 @@ function routers() {
    CloseTable();
    echo "<br>";
    OpenTable();
-   ?>
-
-   <center><b>Add New Router</b></center><br><br>
-   <form action="admin.php" method="post">
-   <table width="100%" cellspacing="5" border="0">
-
-   <tr>
-   <td colspan="2"><b>Router Name:</b><br>
-   <input type="text" name="rname" size="30" maxlength="80"></td>
-   </tr>
-
-   <tr>
-   <td width="50%"><b>Author's Name:</b><br>
-   <input type="text" name="rauthorname" size="30" maxlength="80"></td>
-   <td width="50%"><b>Author's Email Address:</b><br>
-   <input type="text" name="rauthoremail" size="30" maxlength="40"></td>
-   <tr>
-
-   <tr>
-   <td><b>Authors Website Name:</b><br>
-   <input type="text" name="rsitename" size="30" maxlength="80"></td>
-   <td><b>Authors Website URL:</b><br>
-   <input type="text" name="rsiteurl" size="30" maxlength="150"></td>
-   </tr>
-
-   <tr><td colspan="2">&nbsp;</td></tr>
-   <tr><td colspan="2">&nbsp;</td></tr>
-
-   <tr>
-   <td><b>Apx. Build Time:</b>
-   <select name="rtime">
-      <option value="0-9h" selected>0-9 Hours</option>
-      <option value="10-19h">10-19 Hours</option>
-      <option value="20-29h">20-29 Hours</option>
-      <option value="30-39h">30-39 Hours</option>
-      <option value="40-47h">40-47 Hours</option>
-      <option value="2-3d">2-3 Days</option>
-      <option value="4-5d">4-5 Days</option>
-      <option value="6-7d">6-7 Days</option>
-      <option value="1-4w">1-4 Weeks</option>
-      <option value="more1m">> 1 Month</option>
-      <option value="more1y">> 1 Year</option></select></td>
-   <td><b>Total Cost:</b><br>
-   <input type="text" name="rcost" size="20" maxlength="20"></td>
-   </tr>
-
-   <tr>
-   <td><b>Router Software / OS:</b><br>
-   <input type="text" name="rsoft" size="30" maxlength="30"></td>
-   <td><b>CPU:</b><br>
-   <input type="text" name="rcpu" size="30" maxlength="30"></td>
-   </tr>
-	
-   <tr>
-   <td><b>RAM:</b><br>
-   <input type="text" name="rram" size="30" maxlength="30"></td>
-   <td><b>Interface 1:</b><br>
-   <input type="text" name="rif1" size="30" maxlength="30"></td>
-   </tr>
-
-   <tr>
-   <td><b>Hub / Switch:</b><br>
-   <input type="text" name="rhub" size="30" maxlength="30"></td>
-   <td><b>Interface 2:</b><br>
-   <input type="text" name="rif2" size="30" maxlength="30"></td>
-   </tr>
-
-   <tr>
-   <td><b>Drives:</b><br>
-   <input type="text" name="rdrives" size="30" maxlength="80"></td>
-   <td><b>Interface 3:</b><br>
-   <input type="text" name="rif3" size="30" maxlength="30"></td>
-   </tr>
-
-   <tr>
-   <td colspan="2"><b>Extra Notes:</b><br>
-   <input type="text" name="rnote" size="30" maxlength="100"></td>
-   </tr>
-
-   <tr>
-   <td colspan="2"><b>Details:</b><br>
-   <textarea name="rdetails" rows="30" cols="60"></textarea></td>
-   </tr>
-   </table>
-
-   <input type="hidden" name="op" value="router_save">
-   <input type="submit" value="Submit">
-   </form>
    
-   <?php 
+   echo "<center><b>Add New Router</b></center><br><br>"
+   ."<form action=\"admin.php\" method=\"post\">"
+   ."<table width=\"100%\" cellspacing=\"5\" border=\"0\">"
+
+   ."<tr>"
+   ."<td colspan=\"2\"><b>Router Name:</b><br>"
+   ."<input type=\"text\" name=\"rname\" size=\"30\" maxlength=\"80\"></td>"
+   ."</tr>"
+
+   ."<tr>"
+   ."<td width=\"50%\"><b>Author's Name:</b><br>"
+   ."<input type=\"text\" name=\"rauthorname\" size=\"30\" maxlength=\"80\"></td>"
+   ."<td width=\"50%\"><b>Author's Email Address:</b><br>"
+   ."<input type=\"text\" name=\"rauthoremail\" size=\"30\" maxlength=\"40\"></td>"
+   ."<tr>"
+
+   ."<tr>"
+   ."<td><b>Authors Website Name:</b><br>"
+   ."<input type=\"text\" name=\"rsitename\" size=\"30\" maxlength=\"80\"></td>"
+   ."<td><b>Authors Website URL:</b><br>"
+   ."<input type=\"text\" name=\"rsiteurl\" size=\"30\" maxlength=\"150\"></td>"
+   ."</tr>"
+
+   ."<tr><td colspan=\"2\">&nbsp;</td></tr>"
+   ."<tr><td colspan=\"2\">&nbsp;</td></tr>"
+
+   ."<tr>"
+   ."<td><b>Apx. Build Time:</b>"
+   ."<select name=\"rtime\">"
+      ."<option value=\"0-9h\" selected>0-9 Hours</option>"
+      ."<option value=\"10-19h\">10-19 Hours</option>"
+      ."<option value=\"20-29h\">20-29 Hours</option>"
+      ."<option value=\"30-39h\">30-39 Hours</option>"
+      ."<option value=\"40-47h\">40-47 Hours</option>"
+      ."<option value=\"2-3d\">2-3 Days</option>"
+      ."<option value=\"4-5d\">4-5 Days</option>"
+      ."<option value=\"6-7d\">6-7 Days</option>"
+      ."<option value=\"1-4w\">1-4 Weeks</option>"
+      ."<option value=\"more1m\">> 1 Month</option>"
+      ."<option value=\"more1y\">> 1 Year</option></select></td>"
+   ."<td><b>Total Cost:</b><br>"
+   ."<input type=\"text\" name=\"rcost\" size=\"20\" maxlength=\"20\"></td>"
+   ."</tr>"
+
+   ."<tr>"
+   ."<td><b>Router Software / OS:</b><br>"
+   ."<input type=\"text\" name=\"rsoft\" size=\"30\" maxlength=\"30\"></td>"
+   ."<td><b>CPU:</b><br>"
+   ."<input type=\"text\" name=\"rcpu\" size=\"30\" maxlength=\"30\"></td>"
+   ."</tr>"
+	
+   ."<tr>"
+   ."<td><b>RAM:</b><br>"
+   ."<input type=\"text\" name=\"rram\" size=\"30\" maxlength=\"30\"></td>"
+   ."<td><b>Interface 1:</b><br>"
+   ."<input type=\"text\" name=\"rif1\" size=\"30\" maxlength=\"30\"></td>"
+   ."</tr>"
+
+   ."<tr>"
+   ."<td><b>Hub / Switch:</b><br>"
+   ."<input type=\"text\" name=\"rhub\" size=\"30\" maxlength=\"30\"></td>"
+   ."<td><b>Interface 2:</b><br>"
+   ."<input type=\"text\" name=\"rif2\" size=\"30\" maxlength=\"30\"></td>"
+   ."</tr>"
+
+   ."<tr>"
+   ."<td><b>Drives:</b><br>"
+   ."<input type=\"text\" name=\"rdrives\" size=\"30\" maxlength=\"80\"></td>"
+   ."<td><b>Interface 3:</b><br>"
+   ."<input type=\"text\" name=\"rif3\" size=\"30\" maxlength=\"30\"></td>"
+   ."</tr>"
+
+   ."<tr>"
+   ."<td colspan=\"2\"><b>Extra Notes:</b><br>"
+   ."<input type=\"text\" name=\"rnote\" size=\"30\" maxlength=\"100\"></td>"
+   ."</tr>"
+
+   ."<tr>"
+   ."<td colspan=\"2\"><b>Details:</b><br>"
+   ."<textarea name=\"rdetails\" rows=\"30\" cols=\"60\"></textarea></td>"
+   ."</tr>"
+   ."</table>"
+
+   ."<input type=\"hidden\" name=\"op\" value=\"router_save\">"
+   ."<input type=\"submit\" value=\"Submit\">"
+   ."</form>";
+   
    CloseTable();
    include("footer.php");
 }
@@ -357,7 +355,9 @@ function router_delete($rid, $ok=0) {
 
 function router_save($rname, $rauthorname, $rauthoremail, $rsitename, $rsiteurl, $rtime, $rcost, $rsoft, $rcpu, $rram, $rif1, $rif2, $rif3, $rhub, $rdrives, $rnote, $rdetails) {
    global $prefix, $dbi;
-   sql_query("insert into ".$prefix."_routers values (NULL, '$rname', '$rauthorname', '$rauthoremail', '$rsitename', '$rsiteurl', '$rtime', '$rcost', '$rsoft', '$rcpu', '$rram', '$rif1', '$rif2', '$rif3', '$rhub', '$rdrives', '$rnote', '$rdetails')", $dbi);
+//   sql_query("insert into ".$prefix."_routers value (NULL, '$rname', '$rauthorname', '$rauthoremail', '$rsitename', '$rsiteurl', '$rtime', '$rcost', '$rsoft', '$rcpu', '$rram', '$rif1', '$rif2', '$rif3', '$rhub', '$rdrives', '$rnote', '$rdetails', "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0")", $dbi);
+   sql_query("insert into ".$prefix."_routers values (NULL, '$rname', '$rauthorname', '$rauthoremail', '$rsitename', '$rsiteurl', '$rtime', '$rcost', '$rsoft', '$rcpu', '$rram', '$rif1', '$rif2', '$rif3', '$rhub', '$rdrives', '$rnote', '$rdetails', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0')", $dbi);
+//   sql_query("insert into ".$prefix."_routers SET rid=NULL, rname='$rname', rauthorname='$rauthorname', rauthoremail='$rauthoremail', rsitename='$rsitename', rsiteurl='$rsiteurl', rtime='$rtime', rcost='$rcost', rsoft='$rsoft', rcpu='$rcpu', rram='$rram', rif1='$rif1', rif2='$rif2', rif3='$rif3', rhub='$rhub', rdrives='$rdrives', rnote='$rnote', rdetails='$rdetails', vote_total=NULL, vote_1=NULL, vote_2=NULL, vote_3=NULL, vote_4=NULL, vote_5=NULL, vote_6=NULL, vote_7=NULL, vote_8=NULL, vote_9=NULL, vote_10=NULL", $dbi);
    Header("Location: admin.php?op=routers");
 }
 
@@ -482,7 +482,7 @@ switch ($op) {
     break;
 
     case "router_save":
-    router_save($rname, $rauthorname, $rauthoremail, $rsitename, $rsiteurl, $rtime, $rcost, $rsoft, $rcpu, $rram, $rif1, $rif2, $rif3, $rhub, $rdrives, $rnote, $rdetails, $autothumb);
+    router_save($rname, $rauthorname, $rauthoremail, $rsitename, $rsiteurl, $rtime, $rcost, $rsoft, $rcpu, $rram, $rif1, $rif2, $rif3, $rhub, $rdrives, $rnote, $rdetails);
     break;
 
     case "router_save_edit":
