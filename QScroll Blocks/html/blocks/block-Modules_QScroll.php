@@ -1,6 +1,6 @@
 <?php
 /********************************************/
-/* QScrollBlocks v1.0 for PHP-Nuke 5.6      */
+/* QScrollBlocks v1.1 for PHP-Nuke 5.6      */
 /* By: Wes Brewer (nd3@routerdesign.com)    */
 /* http://www.routerdesign.com              */
 /* Copyright © 2003 by Wes Brewer           */
@@ -12,9 +12,9 @@ $iblockfile = "block-Modules.php";        // Blockfile to use for content (filen
 $ibgcolour = "CCCCCC";                    // Background colour to use (RRGGBB)
 $ibgimage = "null";                       // Background Image to use (URL, "null" for none)
 $iwidth = "123";                          // Width of the sidebar (about 15 pixels less then your theme)
-$iheight = "200";                         // Height of the sidebar
+$iheight = "150";                         // Height of the sidebar
 $iscrollspeed = "1";                      // Auto-scroll speed to use (higher is faster)
-$iscrollbars = "0";                       // Manual scroll bars? (2=auto, 1=yes, 0=no)
+$iscrollbars = "2";                       // Manual scroll bars? (2=auto, 1=yes, 0=no)
 $iframeborder = "0";                      // Frame Boarder? (1=yes, 0=no)
 
 

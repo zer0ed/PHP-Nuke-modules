@@ -1,5 +1,5 @@
 /********************************************/
-/* QScroll Blocks v1.0 for PHP-Nuke 5.6     */
+/* QScroll Blocks v1.1 for PHP-Nuke 5.6     */
 /* By: Wes Brewer (nd3@routerdesign.com)    */
 /* http://www.routerdesign.com              */
 /* Copyright © 2003 by Wes Brewer           */
@@ -46,6 +46,8 @@ html/blocks/*.* -------------------------> blocks/*.*  +see notes below
    similar to the old block with _QScroll in the filename.  You must then set the variables
    inside the new QScroll file to point to the old block file (for content generation).  Set
    the remaining settings as needed.
+* If the users browser doesn't support <IFRAME> then the block will display as normal (that is
+   like it use to with no scrolling).
 
 *** As with any script, backup the site before using this. ***
 To use this script, just copy the files to the directories listed above. Then just run
@@ -60,5 +62,9 @@ it like expected file.
 
 6. Changelog
 ------------
+(QScroll Blocks v1.1)
+* Fixed bug where followed links would load inside the iframe/scrollblock.  Now they load as
+   the top page.. like they should ;)
+
 (QScroll Blocks v1.0)
 * 1st official release

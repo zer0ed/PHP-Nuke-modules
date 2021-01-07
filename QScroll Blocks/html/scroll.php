@@ -1,6 +1,6 @@
 <?php
 /********************************************/
-/* QScrollBlocks v1.0 for PHP-Nuke 5.6      */
+/* QScrollBlocks v1.1 for PHP-Nuke 5.6      */
 /* By: Wes Brewer (nd3@routerdesign.com)    */
 /* http://www.routerdesign.com              */
 /* Copyright © 2003 by Wes Brewer           */
@@ -38,6 +38,8 @@ if (is_user($user)) {
 echo "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n"
     ."<html>\n"
     ."<head>\n"
+    // load followed links in top window
+    ."<BASE target=\"_top\">"
     // load selected theme CSS
     ."<LINK REL=\"StyleSheet\" HREF=\"themes/$ThemeSel/style/style.css\" TYPE=\"text/css\">\n\n"
 
