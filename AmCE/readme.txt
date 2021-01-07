@@ -1,5 +1,5 @@
 /*******************************************************
-* AmCE - Admin miniChat Engine v1.21 for PHP-Nuke 7.6
+* AmCE - Admin miniChat Engine v1.22 for PHP-Nuke 7.6
 * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 *  By: Wes Brewer (nd3@routerdesign.com)
 *  http://www.routerdesign.com
@@ -166,34 +166,42 @@ minichat/*.* ----------------------------> minichat/*.*
 
 * Add the following code to your /modules/Your_Account/index.php file...
   
-	Near the bottem of the file in the case switch where it says...
+	In the login function about line 900 in this version find the following code...
  
-	case "login":
-	login($username, $user_password, $redirect, $mode, $f, $t, $random_num, $gfx_check);
-	break;
-
+        if ($redirect == "" ) {
+            Header("Location: modules.php?name=Your_Account&op=userinfo&bypass=1&username=$username");
+        } else if ($mode == "") {
+            Header("Location: modules.php?name=Forums&file=$forward");
+        } else if ($t !="")  {
+            Header("Location: modules.php?name=Forums&file=$forward&mode=$mode&t=$t");
+   
+  
    Change it to this...
 
-	case "login":
-	login($username, $user_password, $redirect, $mode, $f, $t, $random_num, $gfx_check);
-	
-        // ############################# Added by AmCE ######################################    
-        // Read each line of auth.txt into an array
-        $auth_array = file("minichat/auth.txt");
-        foreach ($auth_array as $autheduser) {
-          $autheduser = rtrim($autheduser);  # Get rid of newline characters cuz file() grabs CR/NL data
-          $autheduser =  strtolower($autheduser);  # Change username to lowercase
-          // If user is listed in auth.txt then login to chat.
-          $usernamelow = strtolower($username);  # Change username to lowercase
-          if ($usernamelow == $autheduser) {
-            Header("Location: /minichat/minichat.php?func=enterchat_usermode&nick=$username&reload=10&position=Top&chatkey=5gdsa89t79384ds");
-          }
-        }
-	// ##################################################################################
-	
-	break;
-	
+   
+        if ($redirect == "" ) {
+            Header("Location: modules.php?name=Your_Account&op=userinfo&bypass=1&username=$username");
+            
+	    // ############################# Added by AmCE ######################################    
+            // Read each line of auth.txt into an array
+            $auth_array = file("minichat/auth.txt");
+            foreach ($auth_array as $autheduser) {
+              $autheduser = rtrim($autheduser);  # Get rid of newline characters cuz file() grabs CR/NL data
+              $autheduser =  strtolower($autheduser);  # Change username to lowercase
+              // If user is listed in auth.txt then login to chat.
+              $usernamelow = strtolower($username);  # Change username to lowercase
+              if ($usernamelow == $autheduser) {
+                Header("Location: /minichat/minichat.php?func=enterchat_usermode&nick=$username&reload=10&position=Top&chatkey=5gdsa89t79384ds");
+              }
+            }
+            // ##################################################################################
+	    
+        } else if ($mode == "") {
+            Header("Location: modules.php?name=Forums&file=$forward");
+        } else if ($t !="")  {
+            Header("Location: modules.php?name=Forums&file=$forward&mode=$mode&t=$t");	
 
+	    
 * In the line Header("Location: .....); change the chatkey= variable to the one you used earlier.
   You can change the default refresh rate by changing the reload= variable (in seconds).
   You can change the default position= variable to Bottom if you want chat at the bottom of the page.
@@ -250,6 +258,11 @@ minichat/*.* ----------------------------> minichat/*.*
 
 6. Changelog
 ------------
+(AmCE 1.22)
+* non-public
+* Fixed a bug in usermode where a authorized user could enter chat without the proper password.
+   Thank you Stephen Hawkins (486hawk) for letting me know about this issue!
+
 (AmCE 1.21)
 * non-public
 * Fixed auto hyperlink generation bug.

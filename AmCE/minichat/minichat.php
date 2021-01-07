@@ -1,6 +1,6 @@
 <?php
 /*******************************************************
-* AmCE - Admin miniChat Engine v1.21 for PHP-Nuke 7.6
+* AmCE - Admin miniChat Engine v1.22 for PHP-Nuke 7.6
 * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 *  By: Wes Brewer (nd3@routerdesign.com)
 *  http://www.routerdesign.com
@@ -88,7 +88,7 @@ function writemessage($nick, $reload, $message, $msgtype, $chatkey) {
 
   // Setup the header and footer for the chatlog
   $header = "<html><head><meta http-equiv=\"refresh\" content=\"$reload\"><meta name=\"robots\" content=\"noindex\"></head><body bgcolor=\"#000000\" text=\"#F8F8FF\" link=\"#00FFFF\" alink=\"#00FFFF\" vlink=\"#00FFFF\">\n";
-  $footer = "<hr><center><font size=\"2\" color=\"#FFD700\">[ AmCE - Admin miniChat Engine: v1.21 || &copy 2002-2005 Wes Brewer || Refresh: $reload sec ]</font></center></body></html>";
+  $footer = "<hr><center><font size=\"2\" color=\"#FFD700\">[ AmCE - Admin miniChat Engine: v1.22 || &copy 2002-2005 Wes Brewer || Refresh: $reload sec ]</font></center></body></html>";
 
   // Open chatlog, empty it, save the new message, save the last 9 old messages, close chatlog
   $open_file = fopen("chatlog.php", "w");
