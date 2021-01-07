@@ -20,4 +20,4 @@
 -<br>
 -<br>
 -<br>
-<hr><center><font size="2" color="#FFD700">[ AmCE - Admin miniChat Engine: v1.0 || &copy 2002-2005 Wes Brewer || Refresh: 10 sec ]</font></center></body></html>
+<hr><center><font size="2" color="#FFD700">[ AmCE - Admin miniChat Engine: v1.2 || &copy 2002-2005 Wes Brewer || Refresh: 10 sec ]</font></center></body></html>

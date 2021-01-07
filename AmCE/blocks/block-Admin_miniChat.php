@@ -1,7 +1,7 @@
 <?php
 
 /*******************************************************
-* AmCE - Admin miniChat Engine v1.0 for PHP-Nuke 6.9
+* AmCE - Admin miniChat Engine v1.2 for PHP-Nuke 7.6
 * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 *  By: Wes Brewer (nd3@routerdesign.com)
 *  http://www.routerdesign.com
@@ -157,6 +157,6 @@ if ($inchat == 1 && $connectmode == 2) {
 $content .= "<hr>";
 
 // Version info
-$content .= "<div align=\"right\"><font class=\"tiny\">AmCE v1.0 [nd3]</font></div>";
+$content .= "<div align=\"right\"><font class=\"tiny\">AmCE v1.2 [nd3]</font></div>";
 
 ?>
