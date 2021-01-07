@@ -13,14 +13,36 @@
 /************************************************************************/
 
 //############################################
-// To Do List v1.0b for PHP-Nuke 6.5 - 6.7
+// To Do List v1.2 for PHP-Nuke 7.6
 // By: Wes Brewer (nd3@routerdesign.com)
 // http://www.routerdesign.com
-// Copyright @ 2003 by Wes Brewer
+// Copyright @ 2003-2005 by Wes Brewer
 //############################################
 
+# Security Code
+if ( !defined('ADMIN_FILE') )
+{
+	die("Illegal File Access");
+}
+global $prefix, $db, $admin_file;
+$aid = substr("$aid", 0,25);
+$row = $db->sql_fetchrow($db->sql_query("SELECT title, admins FROM ".$prefix."_modules WHERE title='ToDo_List'"));
+$row2 = $db->sql_fetchrow($db->sql_query("SELECT name, radminsuper FROM ".$prefix."_authors WHERE aid='$aid'"));
+$admins = explode(",", $row['admins']);
+$auth_user = 0;
+for ($i=0; $i < sizeof($admins); $i++) {
+    if ($row2['name'] == "$admins[$i]" AND $row['admins'] != "") {
+        $auth_user = 1;	
+    }
+}
 
-if (!eregi("admin.php", $_SERVER['PHP_SELF'])) { die ("Access Denied"); }
+if ($row2['radminsuper'] == 1) {
+	$radminsuper = 1;	
+}
+
+if ($row2['radminsuper'] == 1 || $auth_user == 1) {
+
+
 
 // copyright footer
 function mycopyright() {
@@ -432,5 +454,15 @@ switch($op) {
 
 }
 
+
+# End Security Code
+} else {
+	@include("header.php");
+	GraphicAdmin();
+	OpenTable();
+	echo "<center><b>"._ERROR."</b><br><br>You do not have administration permission for module \"$module_name\"</center>";
+	CloseTable();
+	@include("footer.php");
+}
 
 ?>

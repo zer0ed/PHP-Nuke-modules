@@ -1,8 +1,8 @@
 <?php
 
 /************************************************************************/
-/* PHP-NUKE: Advanced Content Management System                         */
-/* ============================================                         */
+/* PHP-NUKE: Web Portal System                                          */
+/* ===========================                                          */
 /*                                                                      */
 /* Copyright (c) 2002 by Francisco Burzi                                */
 /* http://phpnuke.org                                                   */
@@ -13,27 +13,17 @@
 /************************************************************************/
 
 //############################################
-// To Do List v1.0b for PHP-Nuke 6.5 - 6.7
+// To Do List v1.2 for PHP-Nuke 7.6
 // By: Wes Brewer (nd3@routerdesign.com)
 // http://www.routerdesign.com
-// Copyright @ 2003 by Wes Brewer
+// Copyright @ 2003-2005 by Wes Brewer
 //############################################
 
-
-if (!eregi("admin.php", $_SERVER['PHP_SELF'])) { die ("Access Denied"); }
-
-switch($op) {
-
-    case "ShowTodos":
-    case "AddTodo":
-    case "EditTodo":
-    case "SaveTodo":
-    case "UpdateTodo":
-    case "DeleteTodo":
-    case "ClearFinTodos":
-    include ("admin/modules/todo.php");
-    break;
-
+if ( !defined('ADMIN_FILE') )
+{
+	die("Illegal File Access");
 }
+global $admin_file;
+adminmenu("".$admin_file.".php?op=ShowTodos", "ToDo List", "ToDo_List.gif");
 
 ?>

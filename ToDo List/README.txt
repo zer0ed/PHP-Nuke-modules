@@ -1,8 +1,8 @@
 //############################################
-// To Do List v1.0b for PHP-Nuke 6.5 - 6.7
+// To Do List v1.2 for PHP-Nuke 7.6
 // By: Wes Brewer (nd3@routerdesign.com)
 // http://www.routerdesign.com
-// Copyright @ 2003 by Wes Brewer
+// Copyright @ 2003-2005 by Wes Brewer
 //############################################
 
 0. Copyright Notice
@@ -31,12 +31,9 @@ README.txt (do not upload)
 sql/*.* ---------------------------------> These are provided for your satisfaction
 screenshots/*.* ---------------------------------> Screenshots for your satisfaction
 
-html/admin/case/*.* ---------------------> admin/case/*.*
-html/admin/link/*.* ---------------------> admin/link/*.*
-html/admin/modules/*.* ------------------> admin/modules/*.*
+html/modules/*.* ------------------> modules/*.*
 html/images/admin-module-todo/*.* ------------> images/routerscript/*.*
 html/images/admin/*.* -------------------> images/admin/*.*
-
 
 3. Use
 ------
@@ -58,3 +55,6 @@ it like expected file.
 ------------
 (To Do List v1.0b)
 * 1st Public Release
+
+(ToDo List v1.2)
+* Now works with phpnuke 7.x series.
