@@ -1,5 +1,5 @@
 /*******************************************************
-* AmCE - Admin miniChat Engine v1.2 for PHP-Nuke 7.6
+* AmCE - Admin miniChat Engine v1.21 for PHP-Nuke 7.6
 * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 *  By: Wes Brewer (nd3@routerdesign.com)
 *  http://www.routerdesign.com
@@ -182,9 +182,11 @@ minichat/*.* ----------------------------> minichat/*.*
         $auth_array = file("minichat/auth.txt");
         foreach ($auth_array as $autheduser) {
           $autheduser = rtrim($autheduser);  # Get rid of newline characters cuz file() grabs CR/NL data
+          $autheduser =  strtolower($autheduser);  # Change username to lowercase
           // If user is listed in auth.txt then login to chat.
-          if ($username == $autheduser) {
-            Header("Location: /minichat/minichat.php?func=enterchat_usermode&nick=$username&reload=10&position=Top&chatkey=123456789012345");
+          $usernamelow = strtolower($username);  # Change username to lowercase
+          if ($usernamelow == $autheduser) {
+            Header("Location: /minichat/minichat.php?func=enterchat_usermode&nick=$username&reload=10&position=Top&chatkey=5gdsa89t79384ds");
           }
         }
 	// ##################################################################################
@@ -222,8 +224,10 @@ minichat/*.* ----------------------------> minichat/*.*
     $auth_array = file("minichat/auth.txt");
     foreach ($auth_array as $autheduser) {
       $autheduser = rtrim($autheduser);  # Get rid of newline characters cuz file() grabs CR/NL data
+      $autheduser =  strtolower($autheduser);  # Change username to lowercase
       // If user is listed in auth.txt then logout of chat.
-      if ($r_username == $autheduser) {
+      $usernamelow = strtolower($r_username);  # Change username to lowercase
+      if ($usernamelow == $autheduser) {
         Header("Location: /minichat/minichat.php?func=exitchat_usermode&nick=$r_username&reload=10");
         $user = "";
       }
@@ -246,6 +250,11 @@ minichat/*.* ----------------------------> minichat/*.*
 
 6. Changelog
 ------------
+(AmCE 1.21)
+* non-public
+* Fixed auto hyperlink generation bug.
+* Fixed username case bug (usermode), now works no matter if user logs in with uppercase or lowercase username.
+
 (AmCE 1.2)
 * non-public
 * Added new engine mode called usermode where selected users can use chat. No need to be admins.

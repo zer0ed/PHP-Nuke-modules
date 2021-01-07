@@ -1,6 +1,6 @@
 <?php
 /*******************************************************
-* AmCE - Admin miniChat Engine v1.2 for PHP-Nuke 7.6
+* AmCE - Admin miniChat Engine v1.21 for PHP-Nuke 7.6
 * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 *  By: Wes Brewer (nd3@routerdesign.com)
 *  http://www.routerdesign.com
@@ -68,19 +68,27 @@ function writemessage($nick, $reload, $message, $msgtype, $chatkey) {
   } elseif ($msgtype == "norm") {
     // Strip all HTML characters from the message (security)
     $message = htmlspecialchars($message);
+    
     // Auto generate hyperlink if http: is found in message
-    $message = eregi_replace("http://([-_./a-zA-Z0-9!&%#?,'=:~]+)",  "<a href=\"http://\\1\" target=\"_blank\">http://\\1</a>", $message);
+    if ( strstr($message, "http://") ) {
+      $message = eregi_replace("http://([-_./a-zA-Z0-9!&%#?,'=:~]+)",  "<a href=\"http://\\1\" target=\"_blank\">http://\\1</a>", $message);
+    
     // Auto generate hyperlink if www is found in message
-    $message = eregi_replace("www([-_./a-zA-Z0-9!&%#?,'=:~]+)",  "<a href=\"http://www\\1\" target=\"_blank\">http://www\\1</a>", $message);
+    } elseif ( strstr($message, "www") ) {
+      $message = eregi_replace("www([-_./a-zA-Z0-9!&%#?,'=:~]+)",  "<a href=\"http://www\\1\" target=\"_blank\">http://www\\1</a>", $message);
+    
     // Auto generate email hyperlink if @ is found in message
-    $message = eregi_replace("([-_./a-zA-Z0-9!&%#?,'=:~]+)@([-_./a-zA-Z0-9!&%#?,'=:~]+)",  "<a href=\"mailto:\\1@\\2\">\\1@\\2</a>", $message);
+    } elseif ( strstr($message, "@") ) {
+      $message = eregi_replace("([-_./a-zA-Z0-9!&%#?,'=:~]+)@([-_./a-zA-Z0-9!&%#?,'=:~]+)",  "<a href=\"mailto:\\1@\\2\">\\1@\\2</a>", $message);
+    }
+
     // Format the new message (colourize, font tags, etc..)
     $new_message = "<font color=\"#C0C0C0\" size=\"2\">($timestamp) </font><font color=\"#87CEFA\"><b>$nick:</b></font> $message<br>\n";
   }
 
   // Setup the header and footer for the chatlog
   $header = "<html><head><meta http-equiv=\"refresh\" content=\"$reload\"><meta name=\"robots\" content=\"noindex\"></head><body bgcolor=\"#000000\" text=\"#F8F8FF\" link=\"#00FFFF\" alink=\"#00FFFF\" vlink=\"#00FFFF\">\n";
-  $footer = "<hr><center><font size=\"2\" color=\"#FFD700\">[ AmCE - Admin miniChat Engine: v1.2 || &copy 2002-2005 Wes Brewer || Refresh: $reload sec ]</font></center></body></html>";
+  $footer = "<hr><center><font size=\"2\" color=\"#FFD700\">[ AmCE - Admin miniChat Engine: v1.21 || &copy 2002-2005 Wes Brewer || Refresh: $reload sec ]</font></center></body></html>";
 
   // Open chatlog, empty it, save the new message, save the last 9 old messages, close chatlog
   $open_file = fopen("chatlog.php", "w");
