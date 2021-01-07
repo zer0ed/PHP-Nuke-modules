@@ -12,33 +12,40 @@
 /* the Free Software Foundation; either version 2 of the License.       */
 /************************************************************************/
 
-/***********************************************
-* Modified and added code                      *
-* ~~~~~~~~~~~~~~~~~~~~~~~                      *
-* Lines: (39-41)                               *
-*                                              *
-* - AmCE Admin miniChat Engine v0.2b           *
-************************************************/
+//##############################################
+// Modified and added code
+// ~~~~~~~~~~~~~~~~~~~~~~~
+//
+//- AmCE Code
+//   (47-48)
+//############################################## 
 
 require_once("mainfile.php");
 
-if (eregi("auth.php",$PHP_SELF)) {
+if (eregi("auth.php",$_SERVER['PHP_SELF'])) {
     Header("Location: index.php");
     die();
 }
 
 if ((isset($aid)) && (isset($pwd)) && ($op == "login")) {
+    $datekey = date("F j");
+    $rcode = hexdec(md5($_SERVER[HTTP_USER_AGENT] . $sitekey . $_POST[random_num] . $datekey));
+    $code = substr($rcode, 2, 6);
+    if (extension_loaded("gd") AND $code != $_POST[gfx_check] AND ($gfx_chk == 1 OR $gfx_chk == 5 OR $gfx_chk == 6 OR $gfx_chk == 7)) {
+	Header("Location: admin.php");
+	die();
+    }
     if($aid!="" AND $pwd!="") {
 	$pwd = md5($pwd);
-	$result=sql_query("select pwd, admlanguage from ".$prefix."_authors where aid='$aid'", $dbi);
-	list($pass, $admlanguage)=sql_fetch_row($result, $dbi);
-	if($pass == $pwd) {
-	    $admin = base64_encode("$aid:$pwd:$admlanguage");
+	$sql = "SELECT pwd, admlanguage FROM ".$prefix."_authors WHERE aid='$aid'";
+	$result = $db->sql_query($sql);
+	$row = $db->sql_fetchrow($result);
+	if($row[pwd] == $pwd) {
+	    $admin = base64_encode("$aid:$pwd:$row[admlanguage]");
 	    setcookie("admin","$admin",time()+2592000);
 	    unset($op);
-			//*************************** nd3's moded code Admin miniChat ***********************
-			Header("Location: /minichat/minichat.php?func=adminlogin&nick=$aid");
-			//***********************************************************************************
+					// added by admin MiniChat
+					Header("Location: /minichat/minichat.php?func=adminlogin&nick=$aid");
 	}
     }
 }
@@ -62,15 +69,16 @@ if(isset($admin) && $admin != "") {
     echo "</html>\n";
     exit;
   }
-  $result=sql_query("select pwd from ".$prefix."_authors where aid='$aid'", $dbi);
-  if(!$result) {
+  $sql = "SELECT pwd FROM ".$prefix."_authors WHERE aid='$aid'";
+  if (!($result = $db->sql_query($sql))) {
         echo "Selection from database failed!";
         exit;
   } else {
-    list($pass)=sql_fetch_row($result, $dbi);
-    if($pass == $pwd && $pass != "") {
+    $row = $db->sql_fetchrow($result);
+    if($row[pwd] == $pwd && $row[pwd] != "") {
         $admintest = 1;
     }
   }
 }
+
 ?>

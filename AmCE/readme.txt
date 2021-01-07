@@ -1,9 +1,9 @@
 /*******************************************************
-* AmCE - Admin miniChat Engine v0.3b for PHP-Nuke 5.5
+* AmCE - Admin miniChat Engine v0.4b for PHP-Nuke 6.9
 * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 *  By: Wes Brewer (nd3@routerdesign.com)
 *  http://www.routerdesign.com
-*  Copyright © 2002 by Wes Brewer [nd3]
+*  Copyright © 2002-2005 by Wes Brewer [nd3]
 ********************************************************/
 
 0. Copyright Notice
@@ -21,14 +21,17 @@
 1. Introduction and Requirements
 --------------------------------
 AmCE - Admin miniChat Engine is a small html based chat room for admins at a
-PHP-Nuke driven website.  It requires PHP-Nuke 5.5 to be installed and working
-properly.  AmCE is very light weight and non-cpu intensive on either the server
+PHP-Nuke driven website.  It requires PHP-Nuke 6.x to be installed and working
+properly.  Currently you need register_globals set to ON in your php.ini file
+for your webserver.  This will be changed in a later release!
+
+AmCE is very light weight and non-cpu intensive on either the server
 or the client.  It doesn't use a database, just files and it's not realtime
 but close enough.. it uses user set HTML META refreshes!
 
 The Engine itself is 1 file minichat.php with many functions. Since AmCE is very
 light, it has very poor security!!  Both it's online.txt (onlinelog) and
-messages.html (chatlog) files have no security whatsoever!  The Engine (minichat.php)
+messages.html (chatlog) files have very poor security!  The Engine (minichat.php)
 has some minimal security checks built in, but don't depend on them!
 
 If security is a consern then use something else!!  If you still want to use miniChat
@@ -58,8 +61,11 @@ minichat/*.* ----------------------------> minichat/*.*
    that direcorty.  (eg. Disallow: /minichat/)
 
 * Add the following code to your admin.php file...
-   Near the bottem of the file in the case switch where it says...
-	 
+   If you have the default files that came with phpnuke 6.9 then you can use the files
+	 provided instead of manually editing them.
+  
+		Near the bottem of the file in the case switch where it says...
+		 
 		case "logout":
 		setcookie("admin");
 		include("header.php");
@@ -85,35 +91,32 @@ minichat/*.* ----------------------------> minichat/*.*
 * Add the following code to your auth.php file...
    Near the top of the file under the 1st if statement where it says...
 	
-		if ((isset($aid)) && (isset($pwd)) && ($op == "login")) {
-  	 	if($aid!="" AND $pwd!="") {
-				$pwd = md5($pwd);
-				$result=sql_query("select pwd, admlanguage from ".$prefix."_authors where aid='$aid'", $dbi);
-				list($pass, $admlanguage)=sql_fetch_row($result, $dbi);
-				if($pass == $pwd) {
-					$admin = base64_encode("$aid:$pwd:$admlanguage");
-					setcookie("admin","$admin",time()+2592000);
-					unset($op);
-				}
-			}
-		}
+    if($aid!="" AND $pwd!="") {
+	$pwd = md5($pwd);
+	$sql = "SELECT pwd, admlanguage FROM ".$prefix."_authors WHERE aid='$aid'";
+	$result = $db->sql_query($sql);
+	$row = $db->sql_fetchrow($result);
+	if($row[pwd] == $pwd) {
+	    $admin = base64_encode("$aid:$pwd:$row[admlanguage]");
+	    setcookie("admin","$admin",time()+2592000);
+	    unset($op);
+	}
 
-   Change it to this ....
+		Change it to this ....
 	 
-		if ((isset($aid)) && (isset($pwd)) && ($op == "login")) {
-  	 	if($aid!="" AND $pwd!="") {
-				$pwd = md5($pwd);
-				$result=sql_query("select pwd, admlanguage from ".$prefix."_authors where aid='$aid'", $dbi);
-				list($pass, $admlanguage)=sql_fetch_row($result, $dbi);
-				if($pass == $pwd) {
-					$admin = base64_encode("$aid:$pwd:$admlanguage");
-					setcookie("admin","$admin",time()+2592000);
-					unset($op);
+    if($aid!="" AND $pwd!="") {
+	$pwd = md5($pwd);
+	$sql = "SELECT pwd, admlanguage FROM ".$prefix."_authors WHERE aid='$aid'";
+	$result = $db->sql_query($sql);
+	$row = $db->sql_fetchrow($result);
+	if($row[pwd] == $pwd) {
+	    $admin = base64_encode("$aid:$pwd:$row[admlanguage]");
+	    setcookie("admin","$admin",time()+2592000);
+	    unset($op);
 					// added by admin MiniChat
 					Header("Location: /minichat/minichat.php?func=adminlogin&nick=$aid");
-				}
-			}
-		}
+	}
+	
 
 * If you want added security then use your web servers authentication method to restrict access
    to the minichat/ directory as mentioned above in section 1.
@@ -121,12 +124,21 @@ minichat/*.* ----------------------------> minichat/*.*
 
 4. To Do's
 ----------
-* Better Security
-* Add timeout values.. incase user's PC crashed and onlinelog was not updated
+* Better Security.
+* Add timeout values.. incase user's PC crashed and onlinelog was not updated.
+* Run with registar_globals in ON or OFF mode (for users who don't have control of their webserver).
+* Add ability to invite someone to chat.
 
 
 5. Changelog
 ------------
+(AmCE 0.4b)
+* non-public, beta stage
+* Added code to clear the chatlog (messages.html file) once all users leave chat (for some security)
+* Added a new faster chat refresh time of 10 seconds (refresh 6x per minute for each user).
+* Added a flashing message picture to the AmCE block beside users in chat!
+* Fixed a typo in breakframes code
+
 (AmCE 0.3b)
 * non-public, beta stage
 * Fixed bad update onlinelog code which cause some users to be droped from

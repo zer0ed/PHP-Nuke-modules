@@ -1,17 +1,16 @@
 <?php
 
 /*******************************************************
-* AmCE - Admin miniChat Engine v0.3b for PHP-Nuke 5.5
+* AmCE - Admin miniChat Engine v0.4b for PHP-Nuke 6.9
 * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 *  By: Wes Brewer (nd3@routerdesign.com)
 *  http://www.routerdesign.com
-*  Copyright © 2002 by Wes Brewer [nd3]
+*  Copyright © 2002-2005 by Wes Brewer [nd3]
 ********************************************************/
 
 // The message box where you type your chat message.
 function messagebox($nick, $reload) {
 	// Make sure a nick has been passed, otherwise deny access
-	if (isset($nick) && $nick != "") {
 		echo "<html><head><meta name=\"robots\" content=\"noindex\"><title>MessageBox</title></head>"
 		."<body bgcolor=\"#990000\" text=\"#FFFFFF\" link=\"#FFFFFF\" alink=\"#FFFFFF\" vlink=\"#FFFFFF\">"
 		."<font size=\"2\">"
@@ -26,7 +25,6 @@ function messagebox($nick, $reload) {
 		."</form>"
 		."</font>"
 		."</body></html>";
-	} else { die ("Access Denied"); }
 }
 
 
@@ -65,7 +63,7 @@ function writemessage($nick, $reload, $message, $msgtype) {
 
 	// Setup the header and footer for the chatlog
 	$header = "<html><head><meta http-equiv=\"refresh\" content=\"$reload\"><meta name=\"robots\" content=\"noindex\"></head><body bgcolor=\"#000000\" text=\"#00FF00\" link=\"#00FF00\" alink=\"#00FF00\" vlink=\"#00FF00\">\n";
-	$footer = "<hr><center><font size=\"2\" color=\"#FFFFFF\">[ AmCE - Admin miniChat Engine: v0.3b || &copy 2002 Wes Brewer || Refresh: $reload sec ]</font></center></body></html>";
+	$footer = "<hr><center><font size=\"2\" color=\"#FFFFFF\">[ AmCE - Admin miniChat Engine: v0.4b || &copy 2002-2005 Wes Brewer || Refresh: $reload sec ]</font></center></body></html>";
 
 	// Open chatlog, empty it, save the new message, save the last 9 old messages, close chatlog
 	$open_file = fopen("messages.html", "w");
@@ -170,6 +168,9 @@ function exitchat($nick, $reload) {
 	
 	// Exit minichat (frames) and load admin page
 	breakframes("/admin.php");
+	
+	// Clear message log if no one is in chat
+	clearchat();
 }
 
 
@@ -226,9 +227,45 @@ function breakframes($toppage) {
 	."</script></head>"
 	."<body><center><h4>Please Wait...</h4></center>"
 	."<p>If you browser doesn't support JavaScript or you have it disabled it then. "
-	."this page will not break out of the frameset automaticlly! "
+	."this page will not break out of the frameset automatically! "
 	."To proceed you can break the frameset manually by clicking <a href=\"$toppage\" target=\"_top\">here</a>."
 	."</body></html>";
+}
+
+
+// If everyone left chat then clear all messages (lame security code)
+function clearchat() {
+	// Read each line of onlinelog into an array
+	$online_array = file("online.txt");
+	
+	foreach ($online_array as $user_on) {
+		$fields = explode(",",$user_on);	
+		if ($fields[1] == 2) {
+			// if someone is still in chat then set inchat > 0
+			$inchat = $inchat + 1;
+		}
+	}
+
+	// if inchat = 0 then nobody is in chat so clear messages
+	if ($inchat == 0) {
+		// Setup the header, footer, and cleared message for the chatlog
+		$header = "<html><head><meta http-equiv=\"refresh\" content=\"10\"><meta name=\"robots\" content=\"noindex\"></head><body bgcolor=\"#000000\" text=\"#00FF00\" link=\"#00FF00\" alink=\"#00FF00\" vlink=\"#00FF00\">\n";
+		$footer = "<hr><center><font size=\"2\" color=\"#FFFFFF\">[ AmCE - Admin miniChat Engine: v0.4b || &copy 2002-2005 Wes Brewer || Refresh: 10 sec ]</font></center></body></html>";
+		$clearedmsg = "<center><font color=\"#FF0000\">.-= The last user has left chat (log cleared) =-.</font></center>\n";
+		
+		// Create 9 blank - lines
+		for ($counter = 1; $counter < 10; $counter++) {
+		$clearmsg .= "-<br>\n";
+		}
+
+		// Open chatlog, empty it, write blank lines, close chatlog
+		$open_file = fopen("messages.html", "w");
+		fputs($open_file, $header);
+		fputs($open_file, $clearedmsg);
+		fputs($open_file, $clearmsg);
+		fputs($open_file, $footer);
+		fclose($open_file);
+	}
 }
 
 
@@ -266,7 +303,11 @@ switch($func) {
     case "breakframes":
     breakframes($toppage);
     break;
-	
+		
+		case "clearchat";
+		clearchat();
+		break;
+		
 }
 
 ?>

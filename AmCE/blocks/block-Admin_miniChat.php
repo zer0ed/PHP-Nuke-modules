@@ -1,11 +1,11 @@
 <?php
 
 /*******************************************************
-* AmCE - Admin miniChat Engine v0.3b for PHP-Nuke 5.5
+* AmCE - Admin miniChat Engine v0.4b for PHP-Nuke 6.9
 * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 *  By: Wes Brewer (nd3@routerdesign.com)
 *  http://www.routerdesign.com
-*  Copyright © 2002 by Wes Brewer [nd3]
+*  Copyright © 2002-2005 by Wes Brewer [nd3]
 ********************************************************/
 
 if (eregi("block-Admin_miniChat.php",$PHP_SELF)) {
@@ -47,8 +47,9 @@ $online_array = file("minichat/online.txt");
 foreach ($online_array as $user_on) {
 	$fields = explode(",",$user_on);	
 	if ($fields[1] == 2) {
-		// Blue for users in chat
-		$content .= "<font class=\"tiny\" color=\"#0000CC\"><b>$fields[0]</b></font><br>";
+		// Blue for users in chat (with flashing message picture)
+		$content .= "<font class=\"tiny\" color=\"#0000CC\"><b>$fields[0]</b></font>";
+		$content .= " <img src=\"minichat/in_chat.gif\" width=\"16\" height=\"15\" alt=\"\"><br>";
 	} elseif ($fields[1] == 1) {
 		// Green for users logged in
 		$content .= "<font class=\"tiny\" color=\"#006600\"><b>$fields[0]</b></font><br>";
@@ -88,7 +89,8 @@ if ($chat == 1) {
 	$content .= "</select><br>";
 	$content .= "Refresh Interval:<br>";
 	$content .= "<select name=\"reload\">";
-	$content .= " <option value=\"15\" selected>15 sec";
+	$content .= " <option value=\"10\" selected>10 sec";
+	$content .= " <option value=\"15\">15 sec";
 	$content .= " <option value=\"20\">20 sec";
 	$content .= " <option value=\"30\">30 sec";
 	$content .= " <option value=\"40\">40 sec";
@@ -104,6 +106,6 @@ if ($chat == 1) {
 }
 
 // Version info
-$content .= "<font class=\"tiny\">AmCE v0.3b [nd3]</font>";
+$content .= "<font class=\"tiny\">AmCE v0.4b [nd3]</font>";
 
 ?>
