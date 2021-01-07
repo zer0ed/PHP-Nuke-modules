@@ -1,16 +1,9 @@
 <?php
 
-/* Function for testing browser, called below */
-function inAgent($agent) {
-   global $HTTP_USER_AGENT;
-   $notAgent = strpos($HTTP_USER_AGENT,$agent) === false;
-   return !$notAgent;
-}
-
-$bgcolor1 = "#CCCCCC";
-$bgcolor2 = "#CCCCCC";
-$bgcolor3 = "#CCCCCC";
-$bgcolor4 = "#CCCCCC";
+$bgcolor1 = "#EEEEEE";
+$bgcolor2 = "#EEEEEE";
+$bgcolor3 = "#EEEEEE";
+$bgcolor4 = "#EEEEEE";
 $textcolor1 = "#000000";
 $textcolor2 = "#000000";
 include("themes/SemiTrans-Gradient-Gold/tables.php");
@@ -26,7 +19,7 @@ function themeheader() {
    if ($banners == 1) { include("banners.php"); }
 
    if ($username == "Anonymous") {
-      $theuser = "<a href=\"modules.php?name=Your_Account&op=new_user\">New User</a>";
+      $theuser = "<a href=\"modules.php?name=Your_Account&amp;op=new_user\">New User</a>";
       $loginout = "<a href=\"modules.php?name=Your_Account\">Login!</a>";
       $userbar = "Settings unavailable: you are not logged in!";
    } else {
@@ -35,11 +28,11 @@ function themeheader() {
       $msgnum = sql_num_rows($result);
 
       $theuser = "Hello $username!";
-      $loginout = "<a href=\"modules.php?name=Your_Account&op=logout\">Logout!</a>";
+      $loginout = "<a href=\"modules.php?name=Your_Account&amp;op=logout\">Logout!</a>";
       if ($userid == "2") {
-         $userbar = "<a href=\"modules.php?name=Private_Messages\">$msgnum New Messages</a>&nbsp;&middot;&nbsp;<a href=\"modules.php?name=Forums&file=profile&mode=editprofile\">Forum Profile</a>&nbsp;&middot;&nbsp;<a href=\"modules.php?name=Your_Account\">Account Settings</a>&nbsp;&middot;&nbsp;<a href=\"admin.php\">Admin</a>";
+         $userbar = "<a href=\"modules.php?name=Private_Messages\">$msgnum New Messages</a>&nbsp;&middot;&nbsp;<a href=\"modules.php?name=Forums&amp;file=profile&amp;mode=editprofile\">Forum Profile</a>&nbsp;&middot;&nbsp;<a href=\"modules.php?name=Your_Account\">Account Settings</a>&nbsp;&middot;&nbsp;<a href=\"admin.php\">Admin</a>";
       } else {
-         $userbar = "<a href=\"modules.php?name=Private_Messages\">$msgnum New Messages</a>&nbsp;&middot;&nbsp;<a href=\"modules.php?name=Forums&file=profile&mode=editprofile\">Forum Profile</a>&nbsp;&middot;&nbsp;<a href=\"modules.php?name=Your_Account\">Account Settings</a>";
+         $userbar = "<a href=\"modules.php?name=Private_Messages\">$msgnum New Messages</a>&nbsp;&middot;&nbsp;<a href=\"modules.php?name=Forums&amp;file=profile&amp;mode=editprofile\">Forum Profile</a>&nbsp;&middot;&nbsp;<a href=\"modules.php?name=Your_Account\">Account Settings</a>";
       }
       // create sound if new messages
       if ($msgnum > "0") {
@@ -49,16 +42,15 @@ function themeheader() {
       }
    }
    
-   $datetime = gmdate("M d | H:i:s") . " GMT";
-
-   // Check for Netscape 4, if yes use different template.    
-   if ( inAgent('MSIE') or inAgent('Opera') ) {
-      $tmpl_file = "themes/SemiTrans-Gradient-Gold/header.html";
-   } elseif ( inAgent('Mozilla/4') ) {
-      $tmpl_file = "themes/SemiTrans-Gradient-Gold/ns4_header.html";
-   } else {
-      $tmpl_file = "themes/SemiTrans-Gradient-Gold/header.html";
-   }
+   // Use LiveClock Javascript, otherwise grab date using php (static clock)
+   $statictime = gmdate(" H:i:s") . " GMT";
+   $datetime = gmdate("M d y | ");
+   $datetime .= "<script language=\"javascript\"><!--
+   new LiveClock();
+   //--></script>";
+   $datetime .= "<NOSCRIPT> $statictime </NOSCRIPT>";
+   
+   $tmpl_file = "themes/SemiTrans-Gradient-Gold/header.html";
 
    $public_msg = public_message();
    $thefile = implode("", file($tmpl_file));

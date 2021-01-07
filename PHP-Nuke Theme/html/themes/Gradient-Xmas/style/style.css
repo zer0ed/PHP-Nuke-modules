@@ -139,6 +139,10 @@ td.row1 { background-color: #E5E5FF; }
 td.row2 { background-color: #e9ecff; }
 td.row3 { background-color: #FFFFFF; }
 
+/* Main table cell colours Hover Code */
+td.hoveron { background-color: #FFFFFF; }
+td.hoveroff { background-color: #E5E5FF; }
+
 /* table cell above the Topics, Post & Last posts cells */
 td.rowpic { background: #FFFFFF url(/themes/Gradient-Xmas/images/cellpic2.jpg) repeat-y; }
 
@@ -167,7 +171,7 @@ td.cat, td.catHead, td.catBottom {
 td.row3Right, td.spaceRow {
    border-color: #FFFFFF;
    border-style: solid;
-   background-color: #D1D7DC;
+   background-color: #FFFFFF;
 }
 
 th.thHead, th.thSides, th.thTop, th.thLeft, th.thRight, th.thBottom, th.thCornerL, th.thCornerR {

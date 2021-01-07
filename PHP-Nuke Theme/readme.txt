@@ -1,5 +1,5 @@
 /*********************************************/
-/* nd3's Gradient Themepak for PHP-Nuke 6.9  */
+/* nd3's Gradient Themepak for PHP-Nuke 7.6  */
 /* By: Wes Brewer (nd3@routerdesign.com)     */
 /* http://www.routerdesign.com               */
 /* Copyright © 2002-2005 by Wes Brewer       */
@@ -32,7 +32,7 @@ usage statistics about your themes.  (How many users use which theme etc...)
 Extract archive to temp dir and copy included as noted below(and chmod if shown):
 ---------------------------------------------------------------------------------
 README.txt (do not upload)
-Extras/photoshop/*.* --------------------> Provided for your satisfaction.
+Extras/devel/*.* --------------------> Provided for your satisfaction.
 Extras/header.htm -----------------------> also for your satisfaction.
 
 html/modules/Forums/templates/RDP/*.* ---> /modules/Forums/templates/RDP/*.*
@@ -64,6 +64,24 @@ it like expected.
 
 6. Changelog
 ------------
+[v050311]
+
+Changes to SemiTrans Themes only
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* Realtime JavaScript Clock added to topbar.  If javascript is disabled the old static clock will show.
+* All new theme graphics.  Brighter block body graphics and colour.  Brighter, new gradient method titles.
+* Better support for non-Microsoft OS fonts.  Bitstream Vera Sans & Arial added.
+* Removed browser check code (hopefully no one is still using Netscape 4)
+* Just incase someone is using NS4.. smaller fonts for input text boxes.
+* Fixed HTML validation problems with topbar code.  now has the proper &amp; code
+* New Router Design Project title.. new look, new format (indexed png).
+
+Changes made to all themes
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+* Forum javascript hover code now supports colours based on themes (no longer hard coded).
+* new hover colour code added to each themes css file for use with forums.
+
+
 [v041223]
 * X-mas (Winter) theme added (with falling javascript snowflakes)
 * Added ThemeStats module (to see user stats on which themes they use!)

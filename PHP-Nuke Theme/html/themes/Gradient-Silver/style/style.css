@@ -129,6 +129,10 @@ td.row1 { background-color: #DDDDDD; }
 td.row2 { background-color: #CCCCCC; }
 td.row3 { background-color: #D1D7DC; }
 
+/* Main table cell colours Hover Code */
+td.hoveron { background-color: #EEEEEE; }
+td.hoveroff { background-color: #DDDDDD; }
+
 /* table cell above the Topics, Post & Last posts cells */
 td.rowpic { background: #EFEFEF url(/themes/Gradient-Silver/images/cellpic2.jpg) repeat-y; }
 

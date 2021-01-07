@@ -50,7 +50,7 @@
  <!-- BEGIN forumrow -->
  <tr> 
   <td class="row1" align="center" valign="middle" height="50"><img src="{catrow.forumrow.FORUM_FOLDER_IMG}" width="46" height="25" alt="{catrow.forumrow.L_FORUM_FOLDER_ALT}" title="{catrow.forumrow.L_FORUM_FOLDER_ALT}"></td>
-  <td class="row1" width="100%" onMouseOver="this.style.backgroundColor='#EEEEEE'; this.style.cursor='hand';" onMouseOut=this.style.backgroundColor="#DDDDDD" onclick="window.location.href='{catrow.forumrow.U_VIEWFORUM}'"> <span class="forumlink"> <a href="{catrow.forumrow.U_VIEWFORUM}" class="forumlink">{catrow.forumrow.FORUM_NAME}</a></span><br />
+  <td class="row1" width="100%" onMouseOver="this.className='hoveron'; this.style.cursor='hand';" onMouseOut="this.className='hoveroff'" onclick="window.location.href='{catrow.forumrow.U_VIEWFORUM}'"> <span class="forumlink"> <a href="{catrow.forumrow.U_VIEWFORUM}" class="forumlink">{catrow.forumrow.FORUM_NAME}</a></span><br />
    <span class="genmed">{catrow.forumrow.FORUM_DESC}</span><br>
    <span class="gensmall">{catrow.forumrow.L_MODERATOR} {catrow.forumrow.MODERATORS}</span>
   </td>
