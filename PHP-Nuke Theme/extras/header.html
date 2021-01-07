@@ -1,0 +1,177 @@
+<!-- statusbar Clock Code // -->
+<script language="Javascript" type="text/javascript">
+<!-- This script performs browser local time manipulations
+ 
+// Month array
+var months = new Array ("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec");
+ 
+// Returns the EST equivalent time for the specified UTC time string
+function ESTTime(UTC_str)
+{
+ // Create a time object with UTC as "local" time and adjust to equivalent EST time
+ 
+ when_EST = new Date(UTC_str);
+ // when_EST.setMinutes(when_EST.getMinutes() + {TIMEZONE OFFSET CONSTANT} * 60);
+ when_EST.setMinutes(when_EST.getMinutes() + 0 * 60);
+ return when_EST;
+}
+ 
+// Returns a local time string for the given UTC time (24 hour format)
+function localTimeStr(UTC_str, separator)
+{
+ // Initialise the local time using the provided UTC time (we will use this to return true local time)
+ when_LCL = new Date(UTC_str + " UTC");
+ 
+ // Create another time object with UTC as "local" time and adjust to equivalent EST time
+ when_EST = ESTTime(UTC_str);
+ 
+ // Only show the date in the local time if it differs from the EST date
+ var LCL_str = ((when_EST.getDay() == when_LCL.getDay()) ? "" : (when_LCL.getDate() + separator + months[when_LCL.getMonth()] + separator));
+ 
+ // Construct local (date and) time string
+ LCL_str += ((when_LCL.getHours() < 10) ? "0" : "") + when_LCL.getHours();
+ LCL_str += ((when_LCL.getMinutes() < 10) ? ":0" : ":") + when_LCL.getMinutes();
+ return LCL_str; 
+}
+
+// Returns a local time string for the given UTC time (12 Hour, AM PM format)
+function localTimeStr12(UTC_str, separator)
+{
+ // Initialise the local time using the provided UTC time (we will use this to return true local time)
+ when_LCL = new Date(UTC_str + " UTC");
+ 
+ // Create another time object with UTC as "local" time and adjust to equivalent EST time
+ when_EST = ESTTime(UTC_str);
+
+ var h = when_LCL.getHours();
+ var ampm = (h >= 12)?"PM" : "AM";
+ if (h > 12) h -= 12;
+ if (h == 0) h = 12;
+ 
+ // Construct local (date and) time string
+ LCL_str = h;
+ LCL_str += ((when_LCL.getMinutes() < 10) ? ":0" : ":") + when_LCL.getMinutes() + " " + ampm;
+ return LCL_str; 
+}
+ 
+// Returns a EST time string for the given UTC time (24 hour format)
+function ESTTimeStr(UTC_str, separator, showSeconds)
+{
+ // Create a time object with UTC as "local" time and adjust to equivalent EST time
+ when_EST = ESTTime(UTC_str);
+ 
+ // Construct EST date and time string
+ var EST_str = when_EST.getDate() + separator + months[when_EST.getMonth()] + separator;
+ EST_str += ((when_EST.getHours() < 10) ? "0" : "") + when_EST.getHours()
+ EST_str += ((when_EST.getMinutes() < 10) ? ":0" : ":") + when_EST.getMinutes();
+ if (showSeconds)
+ {
+  EST_str += ((when_EST.getSeconds() < 10) ? ":0" : ":") + when_EST.getSeconds();
+ }
+ return EST_str;
+}
+
+// Returns a EST time string for the given UTC time (12 Hour, AM PM format)
+function ESTTimeStr12(UTC_str, separator, showSeconds)
+{
+ // Create a time object with UTC as "local" time and adjust to equivalent EST time
+ when_EST = ESTTime(UTC_str);
+
+ var h = when_EST.getHours(); 
+ var ampm = (h >= 12)?"PM":"AM";
+ if (h > 12) h -= 12;
+ if (h == 0) h = 12;
+
+ // Construct EST date and time string
+ EST_str = h;
+ EST_str += ((when_EST.getMinutes() < 10) ? ":0" : ":") + when_EST.getMinutes() + " " + ampm;
+ if (showSeconds)
+ {
+  EST_str += ((when_EST.getSeconds() < 10) ? ":0" : ":") + when_EST.getSeconds();
+ }
+ return EST_str;
+}
+
+// Output a time string to the HTML document
+function writeTime(UTC_str, separator)
+{
+ document.write(ESTTimeStr(UTC_str," ", false) + " GMT");
+}
+ 
+
+var timerID = null;
+var timerRunning = false; 
+ 
+function startTimer()
+{
+ // Stop the clock (in case it's running), then make it go.
+ stopTimer();
+ runClock();
+}
+ 
+function stopTimer()
+{
+ //stop the clock
+ if(timerRunning)
+ {
+  clearTimeout(timerID);
+  timerRunning = false;
+ }
+}
+ 
+function runClock()
+{
+ // Get the current time
+ var date = new Date();
+ 
+ // Adjust this to fake UTC as local to utilise our EST routines
+ date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
+ 
+ // Get the local time and turn into a UTC string that our time routines expect
+ var local = new Date();
+ LCLstr  = local.getUTCDate() + " " + months[local.getUTCMonth()] + " " + local.getUTCFullYear() + " ";
+ LCLstr += local.getUTCHours() + ":" + local.getUTCMinutes();
+ 
+ // Display EST followed by local time in status bar of browser
+ //
+ // Note that this display is similar to the time formats used on the web site
+ window.defaultStatus = "Server Time = " + ESTTimeStr(date, "  ", true) + "  [" + ESTTimeStr12(date, "  ", false) + "]" + "  GMT   ||   Your Local Time = " + localTimeStr(LCLstr, "  ") + "  [" + localTimeStr12(LCLstr, "  ") + "]";
+ 
+ // Notice how setTimeout() calls its own calling function, runClock().;
+ timerID = setTimeout("runClock()",1000);
+ timerRunning = true;
+}
+ 
+// -->
+</script>
+
+<center><img src="themes/RDP-Purple/images/rdptitle.gif" width="491" height="75" alt="Router Design Project"></center>
+<table width="90%" border="0" cellspacing="0" cellpadding="0" align="center">
+ <tr>
+  <td width="5"><img src="themes/RDP-Purple/images/topbar_left.gif" width="5" height="17" alt=""></td> 
+  <td class="topbar" width="150" nowrap>$theuser &nbsp;&middot;&nbsp; $loginout</td>
+  <td class="topbar" align="center">
+   <A href="modules.php?name=Forums&file=privmsg&folder=inbox">Private Messages</a>&nbsp;&middot;&nbsp;
+   <A href="modules.php?name=Forums&file=profile&mode=editprofile">Forum Profile</a>&nbsp;&middot;&nbsp;
+   <A href="modules.php?name=Your_Account">Account Settings</a>
+  </td>
+  <td class="topbar" width="150" nowrap align="right"> 
+   <script language="Javascript" type="text/javascript">
+   <!-- display time and date
+   // Get the current time
+   var date = new Date();
+   // Adjust this to fake UTC as local to utilise our EST routines
+   date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
+   writeTime(date, " ");
+   // -->
+   </script>
+  </td>
+   <td width="5"><img src="themes/RDP-Purple/images/topbar_right.gif" width="5" height="17" alt=""></td>
+ </tr>
+</table>
+<br>
+
+<!-- Layout Table -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0" align="center">
+ <tr valign="top">
+  <td width="135" valign="top">

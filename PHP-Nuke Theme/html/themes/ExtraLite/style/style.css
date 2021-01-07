@@ -1,0 +1,59 @@
+/* ##### php-nuke styles ##### */
+
+body {
+   background-color: #FFFFFF;
+   color: #000000;
+   font-size: 12px;
+   font-family: Verdana, Helvetica, sans-serif;
+}
+
+p, font, div, input, textarea, select, form, td, .content {
+   color: #000000;
+   font-size: 12px;
+   font-family: Verdana, Helvetica, sans-serif;
+}
+
+.tiny {
+   font-size: 10px;
+   font-family: Verdana, Helvetica, sans-serif;
+}
+
+.title, .option {
+   color: #000000;
+   font-size: 12px;
+   font-weight: bold;
+   font-family: Arial, Helvetica, sans-serif;
+}
+
+a:link,a:visited,a:active { color: #333333; TEXT-DECORATION: underline; }
+a:hover { color: #666666; }
+
+/* the topbar */
+.topbar {
+   color: #000000;
+   font-size: 10px;
+   font-family: Verdana, Helvetica, sans-serif;
+}
+
+.copyright {
+   color: #666666;
+   font-style: italic;
+   font-size: 10px;
+   font-family: Arial, Helvetica, sans-serif;
+}
+
+a.copyright {
+   color: #333333;
+   text-decoration: none;
+   font-style: italic;
+   font-size: 10px;
+   font-family: Arial, Helvetica, sans-serif;
+}
+
+a.copyright:hover {
+   color: #666666;
+   text-decoration: underline;
+   font-style: italic;
+   font-size: 10px;
+   font-family: Arial, Helvetica, sans-serif;
+}
