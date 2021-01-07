@@ -1,6 +1,6 @@
 <?php
 /********************************************/
-/* QScrollBlocks v1.2 for PHP-Nuke 6.x      */
+/* QScrollBlocks v1.3 for PHP-Nuke 7.x      */
 /* By: Wes Brewer (nd3@routerdesign.com)    */
 /* http://www.routerdesign.com              */
 /* Copyright © 2003-2005 by Wes Brewer      */

@@ -1,5 +1,5 @@
 /********************************************/
-/* QScrollBlocks v1.2 for PHP-Nuke 6.x      */
+/* QScrollBlocks v1.3 for PHP-Nuke 7.x      */
 /* By: Wes Brewer (nd3@routerdesign.com)    */
 /* http://www.routerdesign.com              */
 /* Copyright © 2003-2005 by Wes Brewer      */
@@ -62,6 +62,10 @@ it like expected file.
 
 6. Changelog
 ------------
+(QScroll Blocks v1.3)
+* When background image is set it remains fixed / stationary (tested in IE6 sp1, Opera 7.54, 
+   Mozilla 1.7.5 ,Firefox 1.0 ,and Konqueror 3.3.2).
+
 (QScroll Blocks v1.2)
 * 3 New scroll modes can be set by the admin using the iscrollmode variable.
    0 = Manual scroll bars only.. no auto scrolling at all
