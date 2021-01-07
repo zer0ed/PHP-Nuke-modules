@@ -1,6 +1,6 @@
 # PHP-Nuke-modules
 
-These are some of the old modules I created for PHP-Nuke back when I ran a website named Router Design Project from 2001 until 2006.
+These are some of the old modules I created for PHP-Nuke back when I ran a website named Router Design Project from 2001 until 2006. I no longer have control over the domain for the old website and so I won't link it here, be mindful of that if you find the domain mentioned in the code or documentation.
 
 Please note that these modules haven't been used or maintained since early 2006. PHP-Nuke itself hasn't been maintained since 2014. Many lines of code in these modules are most likely deprecated in favour of better php practices.
 
