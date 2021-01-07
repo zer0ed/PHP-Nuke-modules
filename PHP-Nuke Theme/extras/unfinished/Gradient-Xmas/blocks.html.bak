@@ -1,9 +1,0 @@
-<table class="block-border" width="135" border="0" cellspacing="0" cellpadding="4">
- <tr> 
-  <td class="block-title-center"><span class="block-title-textbg">: $title :</span></td>
- </tr>
- <tr> 
-  <td class="block-body">$content</td>
- </tr>
-</table>
-<br>
