@@ -1,7 +1,7 @@
 <?php
 
 /********************************************/
-/* RouterScript 1.7 for PHP-Nuke 5.5.0     */
+/* RouterScript 1.71 for PHP-Nuke 5.5.0     */
 /* By: Wes Brewer (nd3@routerdesign.com)    */
 /* http://www.routerdesign.com              */
 /* Copyright © 2002 by Wes Brewer           */
@@ -355,9 +355,7 @@ function router_delete($rid, $ok=0) {
 
 function router_save($rname, $rauthorname, $rauthoremail, $rsitename, $rsiteurl, $rtime, $rcost, $rsoft, $rcpu, $rram, $rif1, $rif2, $rif3, $rhub, $rdrives, $rnote, $rdetails) {
    global $prefix, $dbi;
-//   sql_query("insert into ".$prefix."_routers value (NULL, '$rname', '$rauthorname', '$rauthoremail', '$rsitename', '$rsiteurl', '$rtime', '$rcost', '$rsoft', '$rcpu', '$rram', '$rif1', '$rif2', '$rif3', '$rhub', '$rdrives', '$rnote', '$rdetails', "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0")", $dbi);
-   sql_query("insert into ".$prefix."_routers values (NULL, '$rname', '$rauthorname', '$rauthoremail', '$rsitename', '$rsiteurl', '$rtime', '$rcost', '$rsoft', '$rcpu', '$rram', '$rif1', '$rif2', '$rif3', '$rhub', '$rdrives', '$rnote', '$rdetails', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0')", $dbi);
-//   sql_query("insert into ".$prefix."_routers SET rid=NULL, rname='$rname', rauthorname='$rauthorname', rauthoremail='$rauthoremail', rsitename='$rsitename', rsiteurl='$rsiteurl', rtime='$rtime', rcost='$rcost', rsoft='$rsoft', rcpu='$rcpu', rram='$rram', rif1='$rif1', rif2='$rif2', rif3='$rif3', rhub='$rhub', rdrives='$rdrives', rnote='$rnote', rdetails='$rdetails', vote_total=NULL, vote_1=NULL, vote_2=NULL, vote_3=NULL, vote_4=NULL, vote_5=NULL, vote_6=NULL, vote_7=NULL, vote_8=NULL, vote_9=NULL, vote_10=NULL", $dbi);
+   sql_query("insert into ".$prefix."_routers values (NULL, '$rname', '$rauthorname', '$rauthoremail', '$rsitename', '$rsiteurl', '$rtime', '$rcost', '$rsoft', '$rcpu', '$rram', '$rif1', '$rif2', '$rif3', '$rhub', '$rdrives', '$rnote', '$rdetails', '0', '0.00', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0')", $dbi);
    Header("Location: admin.php?op=routers");
 }
 
@@ -366,7 +364,7 @@ function router_save_edit($rid, $rname, $rauthorname, $rauthoremail, $rsitename,
 
    if ($clearvote == "1" ) {
       // clear votes code
-      sql_query("update ".$prefix."_routers set vote_total='0', vote_1='0', vote_2='0', vote_3='0', vote_4='0', vote_5='0', vote_6='0', vote_7='0', vote_8='0', vote_9='0', vote_10='0' where rid='$rid'", $dbi);
+      sql_query("update ".$prefix."_routers set vote_total='0', vote_avg='0.00', vote_1='0', vote_2='0', vote_3='0', vote_4='0', vote_5='0', vote_6='0', vote_7='0', vote_8='0', vote_9='0', vote_10='0' where rid='$rid'", $dbi);
    } elseif ($authothumb == "1" ) {
       // Router Picture counter, to auto thumbnail each picture
       $handle = opendir("$maindir/$rid");

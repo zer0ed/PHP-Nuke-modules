@@ -1,5 +1,5 @@
 /********************************************/
-/* RouterScript 1.7 for PHP-Nuke 5.5.0     */
+/* RouterScript 1.71 for PHP-Nuke 5.5.0     */
 /* By: Wes Brewer (nd3@routerdesign.com)    */
 /* http://www.routerdesign.com              */
 /* Copyright © 2002 by Wes Brewer           */
@@ -76,6 +76,13 @@ it like expected file.
 
 6. Changelog
 ------------
+(RouterScript 1.71)
+* Fixed add a new router bug which wouldn't save a new router in the database due to
+   a missing value for the new vote_avg entry.
+* Fixed clear votes bug which wouldn't work due to the missing value for the new
+   vote_avg entry in the database (nuke_routers table).
+* Fixed minor display bug in the router poll block.
+
 (RouterScript 1.7)
 * Added better routerlist sorting functionality (routers per page, sortby, sortorder)
 * Improved the overall routerlist header & footer look

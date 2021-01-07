@@ -1,7 +1,7 @@
 <?php
 
 /********************************************/
-/* RouterScript 1.7 for PHP-Nuke 5.5.0     */
+/* RouterScript 1.71 for PHP-Nuke 5.5.0     */
 /* By: Wes Brewer (nd3@routerdesign.com)    */
 /* http://www.routerdesign.com              */
 /* Copyright © 2002 by Wes Brewer           */
@@ -55,7 +55,7 @@ if ($vote_total != "0") {
    $content .= "<br>Total Votes: $vote_total<br>";
    $content .= "Average Rating: $vote_avg<br>";
 } else {
-   $content .= "<br>No voting data available, be the first to vote!";
+   $content .= "<br>No voting data available, be the first to vote!<br>";
 }
 $content .= "<a href=\"modules.php?name=Routers&amp;file=index&amp;func=OneRouter&amp;rid=$randrouter\">more...</a></center>";
 

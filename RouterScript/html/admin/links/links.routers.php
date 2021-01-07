@@ -1,7 +1,7 @@
 <?php
 
 /********************************************/
-/* RouterScript 1.7 for PHP-Nuke 5.5.0     */
+/* RouterScript 1.71 for PHP-Nuke 5.5.0     */
 /* By: Wes Brewer (nd3@routerdesign.com)    */
 /* http://www.routerdesign.com              */
 /* Copyright © 2002 by Wes Brewer           */
