@@ -1,9 +1,9 @@
 <?php
 /********************************************/
-/* QScrollBlocks v1.1 for PHP-Nuke 5.6      */
+/* QScrollBlocks v1.2 for PHP-Nuke 6.x      */
 /* By: Wes Brewer (nd3@routerdesign.com)    */
 /* http://www.routerdesign.com              */
-/* Copyright © 2003 by Wes Brewer           */
+/* Copyright © 2003-2005 by Wes Brewer      */
 /********************************************/
 
 // check for direct access
@@ -57,10 +57,21 @@ echo "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n"
     ." the Crossnuke project found @ http://lophas.phpwebhosting.com -->\n"
     ."<!-- This version is barely modified by Wes Brewer [nd3] -->\n"
     ."<script language=\"JavaScript\" type=\"text/javascript\">\n"
-    ."<!--\n"
-    ."var sspeed = 1;\n"
+    ."<!--\n";
+
+    // Scroll mode (start code)
+    if ( $iscrollmode == "0" ) {
+        echo "var sspeed = 0;\n";
+    } elseif ( $iscrollmode == "1" ) {
+        echo "var sspeed = 1;\n";
+    } elseif ( $iscrollmode == "2" ) {
+        echo "var sspeed = 1;\n";
+    } elseif ( $iscrollmode == "3" ) {
+        echo "var sspeed = 1;\n";
+    }
+    
     // scroll by x pixels each time
-    ."var scrollAmount = $iscrollspeed;\n"
+    echo "var scrollAmount = $iscrollspeed;\n"
     // number of milliseconds between scrolls
     ."var scrollInterval = 25;\n"
     ."var documentYposition = 0;\n"
@@ -105,11 +116,18 @@ echo "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n"
 
     // on page load, start autoscroll code    
     ."<body onLoad=\"autoScroll();\">\n"
-    // table for Opera onmouseout bug
-    ."<table border=\"0\" cellpadding=\"1\" cellspacing=\"0\"><tr><td>\n"
-    // while mouse is over block, stop scrolling
-    ."<div onmouseover=\"sspeed=0\" onmouseout=\"sspeed=1\">\n"
-    ."$content\n"
+    // table for Opera 5 onmouseout bug
+    ."<table border=\"0\" cellpadding=\"1\" cellspacing=\"0\"><tr><td>\n";
+    // Scroll mode (mouseover code)
+    if ( $iscrollmode == "1" ) {
+        // when mouse moves over block, stop scrolling permanently
+        echo "<div onmouseover=\"sspeed=0\">\n";
+    } elseif ( $iscrollmode == "2" ) {
+        // while mouse is over block, stop scrolling then continue when mouse is removed
+        echo "<div onmouseover=\"sspeed=0\" onmouseout=\"sspeed=1\">\n";
+    }    
+
+    echo "$content\n"
     ."</div>\n"
     ."</td></tr></table>\n"
     ."</body>\n"

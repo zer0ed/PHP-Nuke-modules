@@ -1,8 +1,8 @@
 /********************************************/
-/* QScroll Blocks v1.1 for PHP-Nuke 5.6     */
+/* QScrollBlocks v1.2 for PHP-Nuke 6.x      */
 /* By: Wes Brewer (nd3@routerdesign.com)    */
 /* http://www.routerdesign.com              */
-/* Copyright © 2003 by Wes Brewer           */
+/* Copyright © 2003-2005 by Wes Brewer      */
 /********************************************/
 
 0. Copyright Notice
@@ -20,7 +20,7 @@
 1. Introduction and Requirements
 --------------------------------
 QScroll Blocks allows any nuke block/sidebar to be autoscrolled (see http://www.routerdesign.com
-for an example).  It requires PHP-Nuke 5.6 to be installed and working properly.  No database is
+for an example).  It requires PHP-Nuke 6.x to be installed and working properly.  No database is
 needed, as this is a quick and dirty solution.. therefore it is not very optimized for speed.
 
 
@@ -62,6 +62,16 @@ it like expected file.
 
 6. Changelog
 ------------
+(QScroll Blocks v1.2)
+* 3 New scroll modes can be set by the admin using the iscrollmode variable.
+   0 = Manual scroll bars only.. no auto scrolling at all
+   1 = Auto scrolling stops permenently when user moves the mouse over the block (recommended
+        because users can stop auto scrolling from distracting them).
+   2 = Auto scrolling stops temporarily when users moves the mouse over the block then continues
+        once the user moves the mouse elsewhere.
+   3 = Auto scrolling always on (not recommended as it can be difficult to click on a link when
+        it's always moving).
+
 (QScroll Blocks v1.1)
 * Fixed bug where followed links would load inside the iframe/scrollblock.  Now they load as
    the top page.. like they should ;)
