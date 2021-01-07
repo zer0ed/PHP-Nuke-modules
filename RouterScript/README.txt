@@ -1,8 +1,8 @@
 /********************************************/
-/* RouterScript 1.71 for PHP-Nuke 5.5.0     */
+/* RouterScript 1.72 for PHP-Nuke 7.6       */
 /* By: Wes Brewer (nd3@routerdesign.com)    */
 /* http://www.routerdesign.com              */
-/* Copyright © 2002 by Wes Brewer           */
+/* Copyright © 2002-2005 by Wes Brewer      */
 /********************************************/
 
 0. Copyright Notice
@@ -76,6 +76,9 @@ it like expected file.
 
 6. Changelog
 ------------
+(RouterScript 1.72)
+* New Auth code in admin module so RouterScript now works with PHP-Nuke 7.6.
+
 (RouterScript 1.71)
 * Fixed add a new router bug which wouldn't save a new router in the database due to
    a missing value for the new vote_avg entry.

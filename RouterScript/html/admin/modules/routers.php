@@ -1,16 +1,22 @@
 <?php
 
 /********************************************/
-/* RouterScript 1.71 for PHP-Nuke 5.5.0     */
+/* RouterScript 1.72 for PHP-Nuke 7.6       */
 /* By: Wes Brewer (nd3@routerdesign.com)    */
 /* http://www.routerdesign.com              */
-/* Copyright © 2002 by Wes Brewer           */
+/* Copyright © 2005 by Wes Brewer           */
 /********************************************/
 
-if (!eregi("admin.php", $PHP_SELF)) { die ("Access Denied"); }
-   $result = sql_query("select radminency, radminsuper from ".$prefix."_authors where aid='$aid'", $dbi);
-   list($radminency, $radminsuper) = sql_fetch_row($result, $dbi);
-if (($radminency==1) OR ($radminsuper==1)) {
+if ( !defined('ADMIN_FILE') )
+{
+	die("Illegal File Access");
+}
+global $prefix, $db, $admin_file;
+if (!stristr($_SERVER['SCRIPT_NAME'], "".$admin_file.".php")) { die ("Access Denied"); }
+$aid = substr("$aid", 0,25);
+$row = $db->sql_fetchrow($db->sql_query("SELECT radminsuper FROM " . $prefix . "_authors WHERE aid='$aid'"));
+if ($row['radminsuper'] == 1) {
+
 
 // get user settings
 include("modules/Routers/rs_config.php");
